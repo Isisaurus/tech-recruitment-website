@@ -1,4 +1,6 @@
 import { createClient } from 'contentful';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import Image from 'next/image';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -38,6 +40,34 @@ export async function getStaticProps({ params }) {
 }
 
 export default function VacancyDetails({ job }) {
+  const {
+    jobTitle,
+    company,
+    location,
+    salaryIndication,
+    thumbnail,
+    requirements,
+    benefits,
+    details,
+    motivationLetter,
+    jobType,
+    city,
+  } = job.fields;
   console.log(job);
-  return <div>Vacancy Details</div>;
+  return (
+    <div>
+      <h3>{jobTitle}</h3>
+      <div>{company}</div>
+      <div>{city}</div>
+      <div>{salaryIndication}</div>
+      <div>
+        <ul>
+          {requirements.map((req, i) => (
+            <li key={i}>{req}</li>
+          ))}
+        </ul>
+      </div>
+      <div>{documentToReactComponents(details)}</div>
+    </div>
+  );
 }
