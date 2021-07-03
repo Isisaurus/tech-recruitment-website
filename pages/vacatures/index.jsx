@@ -16,6 +16,7 @@ export async function getStaticProps() {
     props: {
       jobs: res.items,
     },
+    revalidate: 1,
   };
 }
 
