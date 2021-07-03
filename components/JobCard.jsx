@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function JobCard({ job }) {
   const {
@@ -20,8 +21,9 @@ export default function JobCard({ job }) {
         src={`https://${thumbnail.fields.file.url}`}
         width={thumbnail.fields.file.details.image.width}
         height={thumbnail.fields.file.details.image.height}
-      ></Image>
-      <span>{jobTitle}</span>
+        alt={`${jobTitle} thumbnail`}
+      />
+      <Link href={`/vacatures/${slug}`}>{jobTitle}</Link>
     </div>
   );
 }
