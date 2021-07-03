@@ -1,6 +1,7 @@
 import { createClient } from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
+import Skeleton from '../../components/Sceleton';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -20,8 +21,9 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    // 404 page will show instead of fallback
-    fallback: false,
+    // if false 404 page will show instead of fallback
+    // if true: fallback page is a template for future content to be injected into
+    fallback: true,
   };
 };
 
@@ -41,6 +43,7 @@ export async function getStaticProps({ params }) {
 }
 
 export default function VacancyDetails({ job }) {
+  if (!job) return <Skeleton />;
   const {
     jobTitle,
     company,
