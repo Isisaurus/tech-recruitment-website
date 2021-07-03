@@ -1,4 +1,5 @@
 import { createClient } from 'contentful';
+import JobCard from '../../components/JobCard';
 
 export async function getStaticProps() {
   // make connection to contentful space
@@ -20,5 +21,11 @@ export async function getStaticProps() {
 
 export default function Vacancies({ jobs }) {
   console.log(jobs);
-  return <div>Vacancy List</div>;
+  return (
+    <div>
+      {jobs.map((job) => (
+        <JobCard key={job.sys.id} job={job} />
+      ))}
+    </div>
+  );
 }
