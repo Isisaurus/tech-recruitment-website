@@ -3,10 +3,20 @@ import Link from "next/link";
 export default function Layout({ children }) {
   return (
     <div className="layout">
-      <header>
+      <header style={{ display: "flex", alignItems: "center" }}>
         <Link href="/">
           <a>
-            <h1>Tech-Recruitment</h1>
+            <h3>Tech-Recruitment</h3>
+          </a>
+        </Link>
+        <Link href="/vacatures">
+          <a>
+            <span style={{ marginLeft: "2rem" }}>Vacatures</span>
+          </a>
+        </Link>
+        <Link href="/over-ons">
+          <a>
+            <span style={{ marginLeft: "2rem" }}>Over ons</span>
           </a>
         </Link>
       </header>
