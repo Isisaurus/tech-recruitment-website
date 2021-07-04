@@ -38,9 +38,6 @@ export async function getStaticProps({ params }) {
 }
 
 export default function VacancyPage({ jobs, currentPage, totalPages }) {
-  //   console.log(jobs);
-  //   console.log(currentPage);
-  //   console.log(totalPages);
   if (!jobs) return <div>Loading...</div>;
   if (currentPage > totalPages) return <div>No more content.</div>;
 

@@ -1,6 +1,7 @@
 import { createClient } from 'contentful';
 import { ContentfulApi } from '../../utils/contentful';
 import JobCard from '../../components/JobCard';
+import Pagination from '../../components/Pagination';
 
 export async function getStaticProps() {
   const jobs = await ContentfulApi.getPaginatedItemSummaries(1);
@@ -25,6 +26,7 @@ export default function Vacancies({ jobs, currentPage, totalPages }) {
       {jobs.map((job) => (
         <JobCard key={job.sys.id} job={job} />
       ))}
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
     </div>
   );
 }
