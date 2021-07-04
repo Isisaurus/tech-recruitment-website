@@ -1,5 +1,6 @@
 import { ContentfulApi } from '../../utils/contentful';
 import JobCard from '../../components/JobCard';
+import Pagination from '../../components/Pagination';
 
 export async function getStaticPaths() {
   const totalPosts = await ContentfulApi.getTotalPostsNumber();
@@ -29,7 +30,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       jobs: jobs.items,
-      currentPage: 1,
+      currentPage: params.page,
       totalPages,
       revalidate: 1,
     },
@@ -41,14 +42,14 @@ export default function VacancyPage({ jobs, currentPage, totalPages }) {
   //   console.log(currentPage);
   //   console.log(totalPages);
   if (!jobs) return <div>Loading...</div>;
-  if (currentPage >= totalPages) return <div>No more content.</div>;
+  if (currentPage > totalPages) return <div>No more content.</div>;
 
   return (
     <div style={{ marginLeft: '200px' }}>
-      <h2>{`Page ${currentPage}`}</h2>
       {jobs.map((job) => (
         <JobCard key={job.sys.id} job={job} />
       ))}
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
     </div>
   );
 }
