@@ -6,25 +6,30 @@ export default function JobCard({ job }) {
     jobTitle,
     slug,
     company,
-    location,
+    city,
     salaryIndication,
     thumbnail,
-    requirements,
-    benefits,
-    details,
-    motivationLetter,
     jobType,
   } = job;
 
   return (
     <div>
-      <Image
-        src={thumbnail.url}
-        width={thumbnail.width}
-        height={thumbnail.height}
-        alt={`${jobTitle} thumbnail`}
-      />
+      <div>
+        <Image
+          src={thumbnail.url}
+          width={200}
+          height={200}
+          alt={`${jobTitle} thumbnail`}
+        />
+      </div>
       <Link href={`/vacatures/${slug}`}>{jobTitle}</Link>
+      <div>
+        <p>{company}</p>
+        <p>{city}</p>
+        <p>{jobType}</p>
+        <p>{salaryIndication}</p>
+      </div>
+      <hr />
     </div>
   );
 }

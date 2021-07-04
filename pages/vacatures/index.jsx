@@ -49,7 +49,7 @@ export async function getStaticProps() {
 export default function Vacancies({ jobs }) {
   // console.log(jobs);
   return (
-    <div>
+    <div style={{ marginLeft: '200px' }}>
       {jobs.map((job) => (
         <JobCard key={job.sys.id} job={job} />
       ))}
