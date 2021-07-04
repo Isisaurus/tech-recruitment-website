@@ -13,6 +13,7 @@ export async function getStaticProps() {
       currentPage: 1,
       totalPages,
     },
+    // fixed?
     revalidate: 1,
   };
 }
