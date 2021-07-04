@@ -103,8 +103,8 @@ export class ContentfulApi {
       `;
 
     const response = await this.callContentful(query);
-    const totalPosts = response.data.jobCollection.total
-      ? response.data.jobCollection.total
+    const totalPosts = response.jobCollection.total
+      ? response.jobCollection.total
       : 0;
 
     return totalPosts;
