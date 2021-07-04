@@ -36,6 +36,16 @@ export async function getStaticProps({ params }) {
     'fields.slug': params.slug,
   });
 
+  // conditional redirect if slug doesn't esixt
+  if (!items.length) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: { job: items[0] },
     revalidate: 1,
