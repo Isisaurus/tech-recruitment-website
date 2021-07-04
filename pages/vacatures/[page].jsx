@@ -42,8 +42,8 @@ export async function getStaticProps({ params }) {
       jobs: jobs.items,
       currentPage: params.page,
       totalPages,
-      revalidate: 1,
     },
+    revalidate: 1,
   };
 }
 
