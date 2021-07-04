@@ -14,18 +14,14 @@ export default function JobCard({ job }) {
     details,
     motivationLetter,
     jobType,
-  } = job.fields;
-  const myLoader = ({ src }) => {
-    return `https://${src}`;
-  };
+  } = job;
 
   return (
     <div>
       <Image
-        loader={myLoader}
-        src={thumbnail.fields.file.url}
-        width={thumbnail.fields.file.details.image.width}
-        height={thumbnail.fields.file.details.image.height}
+        src={thumbnail.url}
+        width={thumbnail.width}
+        height={thumbnail.height}
         alt={`${jobTitle} thumbnail`}
       />
       <Link href={`/vacatures/${slug}`}>{jobTitle}</Link>

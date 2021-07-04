@@ -1,27 +1,53 @@
 import { createClient } from 'contentful';
+import { fetchContent } from '../../utils/contentful';
 import JobCard from '../../components/JobCard';
 
 export async function getStaticProps() {
-  // make connection to contentful space
-  const client = createClient({
-    space: process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID,
-    accessToken: process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN,
-  });
+  const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
+  const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
 
-  const res = await client.getEntries({
-    content_type: 'job',
-  });
+  const res = await fetchContent(`
+    {
+      jobCollection {
+                items {
+                  sys {
+                    id
+                  },
+                  jobTitle,
+                  company,
+                  city,
+                  salaryIndication,
+                  benefits,
+                  requirements,
+                  jobType,
+                  motivationLetter,
+                  thumbnail {
+                    title
+                    description
+                    contentType
+                    fileName
+                    size
+                    url
+                    width
+                    height
+                  },
+                  slug
+                }
+              }
+    }
+  `);
 
   return {
     props: {
-      jobs: res.items,
+      // jobs: res.items,
+      jobs: res.jobCollection.items,
     },
     revalidate: 1,
   };
 }
 
 export default function Vacancies({ jobs }) {
-  console.log(jobs);
+  // console.log(jobs);
   return (
     <div>
       {jobs.map((job) => (
