@@ -27,6 +27,16 @@ export async function getStaticProps({ params }) {
   const jobs = await ContentfulApi.getPaginatedItemSummaries(params.page);
   const totalPages = Math.ceil(jobs.total / process.env.PAGE_SIZE);
 
+  // conditional redirect if slug doesn't esixt
+  if (!jobs.items.length) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       jobs: jobs.items,
