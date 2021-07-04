@@ -22,7 +22,7 @@ export default function JobCard({ job }) {
           alt={`${jobTitle} thumbnail`}
         />
       </div>
-      <Link href={`/vacatures/${slug}`}>{jobTitle}</Link>
+      <Link href={`/vacatures/job/${slug}`}>{jobTitle}</Link>
       <div>
         <p>{company}</p>
         <p>{city}</p>

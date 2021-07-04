@@ -1,53 +1,25 @@
 import { createClient } from 'contentful';
-import { fetchContent } from '../../utils/contentful';
+import { ContentfulApi } from '../../utils/contentful';
 import JobCard from '../../components/JobCard';
 
 export async function getStaticProps() {
-  const space = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID;
-  const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN;
-
-  const res = await fetchContent(`
-    {
-      jobCollection {
-                items {
-                  sys {
-                    id
-                  },
-                  jobTitle,
-                  company,
-                  city,
-                  salaryIndication,
-                  benefits,
-                  requirements,
-                  jobType,
-                  motivationLetter,
-                  thumbnail {
-                    title
-                    description
-                    contentType
-                    fileName
-                    size
-                    url
-                    width
-                    height
-                  },
-                  slug
-                }
-              }
-    }
-  `);
+  const jobs = await ContentfulApi.getPaginatedItemSummaries(1);
+  const totalPages = Math.ceil(jobs.total / process.env.PAGE_SIZE);
 
   return {
     props: {
-      // jobs: res.items,
-      jobs: res.jobCollection.items,
+      jobs: jobs.items,
+      currentPage: 1,
+      totalPages,
+      revalidate: 1,
     },
-    revalidate: 1,
   };
 }
 
-export default function Vacancies({ jobs }) {
+export default function Vacancies({ jobs, currentPage, totalPages }) {
   // console.log(jobs);
+  // console.log(currentPage);
+  // console.log(totalPages);
   return (
     <div style={{ marginLeft: '200px' }}>
       {jobs.map((job) => (
