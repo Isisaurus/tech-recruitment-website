@@ -4,6 +4,7 @@ import { ContentfulApi } from '../../utils/contentful';
 import JobCard from '../../components/JobCard';
 import Pagination from '../../components/Pagination';
 import Select from 'react-select';
+import { useQuery } from 'react-query';
 
 const fetchJobs = async (query, page) => {
   const data = await ContentfulApi.callContentful(query, page);
