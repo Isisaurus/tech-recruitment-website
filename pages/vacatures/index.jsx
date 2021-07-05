@@ -42,6 +42,13 @@ export default function Vacancies({ jobs, currentPage, totalPages, values }) {
 
   // console.log(data);
 
+  const handleCities = (values) => {
+    console.log(values);
+  };
+  const handleTypes = (values) => {
+    console.log(values);
+  };
+
   useEffect(() => {}, [data]);
 
   return (
@@ -55,6 +62,7 @@ export default function Vacancies({ jobs, currentPage, totalPages, values }) {
             instanceId="cities"
             placeholder="Filter by cities..."
             isMulti
+            onChange={handleCities}
           />
           <br />
           <Select
@@ -64,6 +72,7 @@ export default function Vacancies({ jobs, currentPage, totalPages, values }) {
             instanceId="jobTypes"
             placeholder="Filter by job type..."
             isMulti
+            onChange={handleTypes}
           />
           <br />
         </form>
