@@ -7,33 +7,37 @@ import Select from 'react-select';
 
 const fetchJobs = async (query, page) => {
   const data = await ContentfulApi.callContentful(query, page);
-  return data;
+  const valueData = await ContentfulApi.getValues();
+  return { data, valueData };
 };
 
 export async function getStaticProps() {
   const data = await fetchJobs();
-  const totalPages = data.total / process.env.PAGE_SIZE;
+  const totalPages = Math.ceil(data.data.total / process.env.PAGE_SIZE);
 
-  const { items, cities } = data;
+  const items = data.data.items;
+  const values = data.valueData;
 
   return {
     props: {
       jobs: items,
       totalPages,
+      values,
     },
     revalidate: 1,
   };
 }
 
-export default function Vacancies({ jobs, currentPage, totalPages }) {
-  // // console.log(jobs);
+export default function Vacancies({ jobs, currentPage, totalPages, values }) {
+  // console.log(jobs);
   // console.log(currentPage);
   // console.log(totalPages);
+  // console.log(values);
 
   const [data, setData] = useState(jobs);
   const handleDataChange = async () => {
     const newData = await fetchJobs({ cities: `Amsterdam,Den Haag` }, 1);
-    setData(newData.items);
+    setData(newData.data.items);
   };
 
   // console.log(data);
@@ -43,7 +47,26 @@ export default function Vacancies({ jobs, currentPage, totalPages }) {
   return (
     <div style={{ marginLeft: '200px' }}>
       <div>
-        <form>{/* <Select /> */}</form>
+        <form>
+          <Select
+            options={values.cities}
+            getOptionLabel={(option) => option}
+            getOptionValue={(option) => option}
+            instanceId="cities"
+            placeholder="Filter by cities..."
+            isMulti
+          />
+          <br />
+          <Select
+            options={values.jobTypes}
+            getOptionLabel={(item) => item}
+            getOptionValue={(item) => item}
+            instanceId="jobTypes"
+            placeholder="Filter by job type..."
+            isMulti
+          />
+          <br />
+        </form>
         <button onClick={handleDataChange}>Clcik to query</button>
       </div>
       {data.map((job) => (
