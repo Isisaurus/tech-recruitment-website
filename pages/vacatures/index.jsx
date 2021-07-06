@@ -27,6 +27,9 @@ export async function getStaticProps() {
 }
 
 export default function Vacancies({ content, values }) {
+  const [gte, setGte] = useState([]);
+  const [lte, setLte] = useState([]);
+  const [queryStr, setQueryStr] = useState([]);
   const [cities, setCities] = useState([]);
   const [jobTypes, setJobTypes] = useState([]);
   const [query, setQuery] = useState({});
@@ -87,10 +90,42 @@ export default function Vacancies({ content, values }) {
             isMulti
           />
         </div>
+        <div style={{ margin: '2em 0' }}>
+          <input
+            type="search"
+            name="queryStr"
+            id="queryStr"
+            onChange={(e) => {
+              setQueryStr(e.target.value);
+            }}
+          />
+        </div>
+        <div style={{ margin: '2em 0' }}>
+          <label htmlFor="gte">More than equal</label>
+          <input
+            type="number"
+            name="gte"
+            id="gte"
+            onChange={(e) => {
+              setGte(e.target.value);
+            }}
+          />
+        </div>
+        <div style={{ margin: '2em 0' }}>
+          <label htmlFor="lte">Less than equal</label>
+          <input
+            type="number"
+            name="lte"
+            id="lte"
+            onChange={(e) => {
+              setLte(e.target.value);
+            }}
+          />
+        </div>
         <button
           style={{ margin: '2em 0' }}
           onClick={() => {
-            setQuery({ cities, jobTypes });
+            setQuery({ cities, jobTypes, queryStr, lte, gte });
             setCurrentPage(1);
             setShouldFetch(true);
           }}

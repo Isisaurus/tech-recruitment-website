@@ -35,7 +35,16 @@ export class ContentfulApi {
     jobType: 'full-time,part-time'
   }
   */
-  static async callContentful(query = { cities: [], jobTypes: [] }, page = 1) {
+  static async callContentful(
+    query = {
+      cities: [],
+      jobTypes: [],
+      queryStr: undefined,
+      lte: undefined,
+      gte: undefined,
+    },
+    page = 1
+  ) {
     try {
       let skip = 0;
       if (page !== 1) {
@@ -59,6 +68,7 @@ export class ContentfulApi {
           // ['in']: query?.jobType || undefined,
           ['in']: `${query.jobTypes?.join(',')}` || undefined,
         },
+        query: query.queryStr,
       });
 
       return { total: res.total, items: res.items };
