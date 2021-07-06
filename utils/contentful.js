@@ -28,11 +28,19 @@ export class ContentfulApi {
   }
   // make fetch call to contentful API
   static async callContentful(query, page = 1) {
+    /*
+    const query = {
+      cities: 'Amsterdam,DenHaag,Nijmegen',
+      gte: 2000,
+      lte: 3500,
+      jobType: 'full-time,part-time'
+    }
+    */
     try {
       const res = await client.getEntries({
         content_type: 'job',
         limit: process.env.PAGE_SIZE,
-        skip: page === 1 ? 0 : page - 1,
+        skip: page === 1 ? 0 : process.env.PAGE_SIZE * (page - 1),
         'fields.city': {
           // ['in']: 'Nijmegen,Amsterdam,Den Haag',
           ['in']: query?.cities || undefined,

@@ -10,13 +10,18 @@ export default function JobCard({ job }) {
     salaryIndication,
     thumbnail,
     jobType,
-  } = job;
+  } = job.fields;
+
+  const myLoader = ({ src }) => {
+    return `https:${src}`;
+  };
 
   return (
     <div>
       <div>
         <Image
-          src={thumbnail.url}
+          loader={myLoader}
+          src={thumbnail.fields.file.url}
           width={200}
           height={200}
           alt={`${jobTitle} thumbnail`}
