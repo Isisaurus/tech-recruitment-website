@@ -7,8 +7,8 @@ import Select from 'react-select';
 import useSWR from 'swr';
 import JobList from '../../components/JobList';
 
-const fetcher = async (page) => {
-  const res = await ContentfulApi.callContentful({}, page);
+const fetcher = async (query, page) => {
+  const res = await ContentfulApi.callContentful(query, page);
 
   return res;
 };
@@ -25,12 +25,13 @@ export async function getStaticProps() {
 }
 
 export default function Vacancies({ content }) {
+  const [cities, setCities] = useState({});
   const [shouldFetch, setShouldFetch] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, error } = useSWR(
-    () => (shouldFetch ? currentPage : 1),
-    fetcher,
+    () => (shouldFetch ? [cities, currentPage] : [{}, 1]),
+    (cities, page) => fetcher(cities, page),
     {
       initialData: content,
       shouldRetryOnError: false,
@@ -56,6 +57,15 @@ export default function Vacancies({ content }) {
   if (data)
     return (
       <div style={{ marginLeft: '200px' }}>
+        <button
+          onClick={() => {
+            setCities({ cities: 'Den Haag' });
+            setCurrentPage(1);
+            setShouldFetch(true);
+          }}
+        >
+          SET CITY: Den Haag
+        </button>
         <div>
           {pageArr.map((num) => (
             <button

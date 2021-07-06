@@ -41,6 +41,7 @@ export class ContentfulApi {
       // if (query) {
       //   cities = Object.values(query.cities).join(',');
       // }
+      console.log(query);
 
       let skip = 0;
       if (page !== 1) {
@@ -53,7 +54,7 @@ export class ContentfulApi {
         skip: skip,
         'fields.city': {
           // ['in']: 'Den Haag',
-          ['in']: undefined,
+          ['in']: query.cities || undefined,
         },
         'fields.salaryIndication': {
           ['gte']: query?.gte || undefined,
