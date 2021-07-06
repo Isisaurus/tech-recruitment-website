@@ -15,22 +15,26 @@ const fetcher = async (query, page) => {
 
 export async function getStaticProps() {
   const content = await fetcher();
+  const values = await ContentfulApi.getValues();
 
   return {
     props: {
       content,
+      values,
     },
     revalidate: 1,
   };
 }
 
-export default function Vacancies({ content }) {
-  const [cities, setCities] = useState({});
+export default function Vacancies({ content, values }) {
+  const [cities, setCities] = useState([]);
+  const [jobTypes, setJobTypes] = useState([]);
+  const [query, setQuery] = useState({});
   const [shouldFetch, setShouldFetch] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, error } = useSWR(
-    () => (shouldFetch ? [cities, currentPage] : [{}, 1]),
+    () => (shouldFetch ? [query, currentPage] : [{}, 1]),
     (cities, page) => fetcher(cities, page),
     {
       initialData: content,
@@ -57,14 +61,41 @@ export default function Vacancies({ content }) {
   if (data)
     return (
       <div style={{ marginLeft: '200px' }}>
+        <div style={{ margin: '2em 0' }}>
+          <Select
+            options={values.cities}
+            getOptionLabel={(city) => city}
+            getOptionValue={(city) => city}
+            instanceId="cities"
+            placeholder="Filter by cities.."
+            onChange={(val) => {
+              setCities(val);
+            }}
+            isMulti
+          />
+        </div>
+        <div style={{ margin: '2em 0' }}>
+          <Select
+            options={values.jobTypes}
+            getOptionLabel={(type) => type}
+            getOptionValue={(type) => type}
+            instanceId="jobTypes"
+            placeholder="Filter by job type..."
+            onChange={(val) => {
+              setJobTypes(val);
+            }}
+            isMulti
+          />
+        </div>
         <button
+          style={{ margin: '2em 0' }}
           onClick={() => {
-            setCities({ cities: 'Den Haag' });
+            setQuery({ cities, jobTypes });
             setCurrentPage(1);
             setShouldFetch(true);
           }}
         >
-          SET CITY: Den Haag
+          SET QUERY
         </button>
         <div>
           {pageArr.map((num) => (

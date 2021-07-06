@@ -35,14 +35,8 @@ export class ContentfulApi {
     jobType: 'full-time,part-time'
   }
   */
-  static async callContentful(query = {}, page = 1) {
+  static async callContentful(query = { cities: [], jobTypes: [] }, page = 1) {
     try {
-      // let cities;
-      // if (query) {
-      //   cities = Object.values(query.cities).join(',');
-      // }
-      console.log(query);
-
       let skip = 0;
       if (page !== 1) {
         skip = (+page - 1) * 6;
@@ -54,14 +48,16 @@ export class ContentfulApi {
         skip: skip,
         'fields.city': {
           // ['in']: 'Den Haag',
-          ['in']: query.cities || undefined,
+          // ['in']: query.cities || undefined,
+          ['in']: `${query.cities?.join(',')}` || undefined,
         },
         'fields.salaryIndication': {
           ['gte']: query?.gte || undefined,
           ['lte']: query?.lte || undefined,
         },
         'fields.jobType': {
-          ['in']: query?.jobType || undefined,
+          // ['in']: query?.jobType || undefined,
+          ['in']: `${query.jobTypes?.join(',')}` || undefined,
         },
       });
 
