@@ -9,7 +9,7 @@ import JobList from '../../components/JobList';
 
 const fetcher = async (page) => {
   const res = await ContentfulApi.callContentful({}, page);
-  console.log(`FETCHER! ${page}`);
+
   return res;
 };
 
@@ -26,8 +26,7 @@ export async function getStaticProps() {
 
 export default function Vacancies({ content }) {
   const [shouldFetch, setShouldFetch] = useState(false);
-  const [currentPage, setCurrentPage] = useState();
-  console.log(currentPage);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const { data, error } = useSWR(
     () => (shouldFetch ? currentPage : 1),
@@ -38,7 +37,6 @@ export default function Vacancies({ content }) {
     }
   );
 
-  console.log(data);
   const totalPages = Math.ceil(data.total / 6);
 
   // pagination buttons

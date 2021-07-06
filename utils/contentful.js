@@ -45,7 +45,6 @@ export class ContentfulApi {
       let skip = 0;
       if (page !== 1) {
         skip = (+page - 1) * 6;
-        console.log('IN IF STATEMENT!');
       }
 
       const res = await client.getEntries({
@@ -53,7 +52,7 @@ export class ContentfulApi {
         limit: 6,
         skip: skip,
         'fields.city': {
-          // ['in']: 'Nijmegen,Amsterdam,Den Haag',
+          // ['in']: 'Den Haag',
           ['in']: undefined,
         },
         'fields.salaryIndication': {
@@ -65,7 +64,6 @@ export class ContentfulApi {
         },
       });
 
-      console.log(res.items);
       return { total: res.total, items: res.items };
     } catch (err) {
       console.log(err);
