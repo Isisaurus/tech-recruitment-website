@@ -27,23 +27,34 @@ export class ContentfulApi {
     }
   }
   // make fetch call to contentful API
-  static async callContentful(query, page = 1) {
-    /*
-    const query = {
-      cities: 'Amsterdam,DenHaag,Nijmegen',
-      gte: 2000,
-      lte: 3500,
-      jobType: 'full-time,part-time'
-    }
-    */
+  /*
+  const query = {
+    cities: 'Amsterdam,DenHaag,Nijmegen',
+    gte: 2000,
+    lte: 3500,
+    jobType: 'full-time,part-time'
+  }
+  */
+  static async callContentful(query = {}, page = 1) {
     try {
+      // let cities;
+      // if (query) {
+      //   cities = Object.values(query.cities).join(',');
+      // }
+
+      let skip = 0;
+      if (page !== 1) {
+        skip = (+page - 1) * 6;
+        console.log('IN IF STATEMENT!');
+      }
+
       const res = await client.getEntries({
         content_type: 'job',
-        limit: process.env.PAGE_SIZE,
-        skip: page === 1 ? 0 : process.env.PAGE_SIZE * (page - 1),
+        limit: 6,
+        skip: skip,
         'fields.city': {
           // ['in']: 'Nijmegen,Amsterdam,Den Haag',
-          ['in']: query?.cities || undefined,
+          ['in']: undefined,
         },
         'fields.salaryIndication': {
           ['gte']: query?.gte || undefined,
@@ -54,9 +65,11 @@ export class ContentfulApi {
         },
       });
 
+      console.log(res.items);
       return { total: res.total, items: res.items };
     } catch (err) {
-      console.log(err + '💥💥💥');
+      console.log(err);
+      console.log('----------💥💥💥-----------');
     }
   }
 }
