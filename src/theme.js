@@ -5,16 +5,22 @@ import { red } from '@material-ui/core/colors';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#0467B1',
     },
     secondary: {
-      main: '#19857b',
-    },
-    error: {
-      main: red.A400,
+      main: '#6E19B0',
     },
     background: {
       default: '#fff',
+    },
+    text: {
+      primary: '#333',
+    },
+  },
+  typography: {
+    h2: {
+      fontWeight: 700,
+      fontSize: '4rem',
     },
   },
 });
