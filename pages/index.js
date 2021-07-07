@@ -1,9 +1,11 @@
-import styles from "../styles/Home.module.css";
+import { Typography } from '@material-ui/core';
 
 export default function Home() {
   return (
     <div>
-      <i>Landing page</i>
+      <Typography variant="h1" color="primary">
+        Landing page
+      </Typography>
     </div>
   );
 }
