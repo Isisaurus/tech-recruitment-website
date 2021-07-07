@@ -56,8 +56,6 @@ export class ContentfulApi {
         limit: 6,
         skip: skip,
         'fields.city': {
-          // ['in']: 'Den Haag',
-          // ['in']: query.cities || undefined,
           ['in']: `${query.cities?.join(',')}` || undefined,
         },
         'fields.salaryIndication': {

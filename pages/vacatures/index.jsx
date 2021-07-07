@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createClient } from 'contentful';
 import { ContentfulApi } from '../../utils/contentful';
+import Error from './../../components/Error';
 
 import Select from 'react-select';
 
@@ -59,7 +60,7 @@ export default function Vacancies({ content, values }) {
   };
   const pageArr = createPagination(totalPages);
 
-  if (error) return <div>Sorry! Something went wrong!</div>;
+  if (error) return <Error />;
 
   if (data)
     return (
