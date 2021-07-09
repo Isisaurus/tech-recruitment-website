@@ -6,12 +6,41 @@ import {
   Toolbar,
   makeStyles,
   Box,
+  Button,
 } from '@material-ui/core';
 
 const useStyles = makeStyles({
-  logo: {},
   AppBar: {
     boxShadow: 'none',
+    marginTop: '1rem',
+    padding: '0 1rem',
+  },
+  logo: {
+    marginRight: '2em',
+    fontSize: '1.5rem',
+    filter: 'none',
+    background: 'linear-gradient( 180deg , #1E8DFF, #BE6CFF)',
+    fontWeight: 700,
+    WebkitTextFillColor: 'transparent',
+    WebkitBackgroundClip: 'text',
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#1E8DFF',
+    '&:visited': {
+      color: '#1E8DFF',
+      '&:hover': {
+        color: '#7a7a7a',
+      },
+    },
+    '&:hover': {
+      color: '#7a7a7a',
+    },
+  },
+  button: {
+    marginLeft: 'auto',
+    padding: '.5em 2em',
+    textTransform: 'none',
   },
 });
 
@@ -21,20 +50,29 @@ function Navbar() {
     <AppBar position="static" color="transparent" className={classes.AppBar}>
       <Toolbar component={Box}>
         <Link href="/">
-          <a>
-            <Typography className={classes.logo}>Tech-Recruitment</Typography>
+          <a className={classes.link}>
+            <Typography component="h1" className={classes.logo}>
+              Tech-Recruitment
+            </Typography>
           </a>
         </Link>
         <Link href="/vacatures">
-          <a>
-            <span style={{ marginLeft: '2rem' }}>Vacatures</span>
+          <a className={classes.link}>
+            <Typography variant="subtitle2" className={classes.navEl}>
+              Vacatures
+            </Typography>
           </a>
         </Link>
         <Link href="/over-ons">
-          <a>
-            <span style={{ marginLeft: '2rem' }}>Over ons</span>
+          <a className={classes.link}>
+            <Typography variant="subtitle2" className={classes.navEl}>
+              Over ons
+            </Typography>
           </a>
         </Link>
+        <Button variant="contained" className={classes.button} color="primary">
+          <Typography>Contact</Typography>
+        </Button>
       </Toolbar>
     </AppBar>
   );

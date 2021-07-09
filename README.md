@@ -30,29 +30,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-## Documentation used to create this project
-
-[SWR - React Hooks library for data fetching](https://swr.vercel.app/docs/with-nextjs)
-
-[Contentful - Documentation: Content Delivery API](https://www.contentful.com/developers/docs/references/content-delivery-api/)
-
-[React Select Component Documentation](https://react-select.com/home)
-
-[Material-UI - NextJs Example Github Repo](https://github.com/mui-org/material-ui/tree/next/examples/nextjs)
-
-## Articles used to create this project
-
-Eventually, I have decided to use the Content Delivery API of Contantful to fetch and query data for the project, but for some time I was experimenting with the Contentful GraphQL Content API.
-
-The following articles provided me with the information to make the best decision for the project:
-
-[Paginating your Contentful blog posts in Next.js with the GraphQL API](https://www.contentful.com/blog/2021/04/23/paginating-contentful-blogposts-with-nextjs-graphql-api/)
-
-[Next.js, Contentful CMS, GraphQL, oh my!](https://bholmes.dev/blog/nextjs-contentful-cms-graphql-oh-my/)
-
-## Tricky situations during development :)
-
-# Material-UI integration with Next.js
+## Material-UI integration with Next.js
 
 After the initial setup to integrate Material-UI based on the repository provided I still had issues using the styled components from the library.
 
@@ -68,3 +46,23 @@ This problem has been acknowledged by both libraries and it seems to be an issue
 
 Have a similar issue in your setup? This is where I found answers:
 [Box component odd behavior on Next.js](https://github.com/mui-org/material-ui/issues/19679)
+
+## Documentation used to create this project
+
+[SWR - React Hooks library for data fetching](https://swr.vercel.app/docs/with-nextjs)
+
+[Contentful - Documentation: Content Delivery API](https://www.contentful.com/developers/docs/references/content-delivery-api/)
+
+[React Select Component Documentation](https://react-select.com/home)
+
+[Material-UI - NextJs Example /Github Repository/](https://github.com/mui-org/material-ui/tree/next/examples/nextjs)
+
+## Articles used to create this project
+
+Eventually, I have decided to use the Content Delivery API of Contantful to fetch and query data for the project, but for some time I was experimenting with the Contentful GraphQL Content API.
+
+The following articles provided me with the information to make the best decision for the project:
+
+[Paginating your Contentful blog posts in Next.js with the GraphQL API](https://www.contentful.com/blog/2021/04/23/paginating-contentful-blogposts-with-nextjs-graphql-api/)
+
+[Next.js, Contentful CMS, GraphQL, oh my!](https://bholmes.dev/blog/nextjs-contentful-cms-graphql-oh-my/)
