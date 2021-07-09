@@ -38,6 +38,8 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 [React Select Component Documentation](https://react-select.com/home)
 
+[Material-UI - NextJs Example Github Repo](https://github.com/mui-org/material-ui/tree/next/examples/nextjs)
+
 ## Articles used to create this project
 
 Eventually, I have decided to use the Content Delivery API of Contantful to fetch and query data for the project, but for some time I was experimenting with the Contentful GraphQL Content API.
@@ -46,4 +48,23 @@ The following articles provided me with the information to make the best decisio
 
 [Paginating your Contentful blog posts in Next.js with the GraphQL API](https://www.contentful.com/blog/2021/04/23/paginating-contentful-blogposts-with-nextjs-graphql-api/)
 
-[NextJS, Contentful CMS, GraphQL, oh my!](https://bholmes.dev/blog/nextjs-contentful-cms-graphql-oh-my/)
+[Next.js, Contentful CMS, GraphQL, oh my!](https://bholmes.dev/blog/nextjs-contentful-cms-graphql-oh-my/)
+
+## Tricky situations during development :)
+
+# Material-UI integration with Next.js
+
+After the initial setup to integrate Material-UI based on the repository provided I still had issues using the styled components from the library.
+
+In this project:
+
+- I used a cutom Material-UI theme (src/theme.js)
+- I wrapped my page components with a layout component (components/layout.jsx)
+- I wrote custom css for each component individually using the makeStyles() hook from Material-UI
+
+Certain components from Material-UI v4.3.1 (eg.: Box) still threw an error after integrating the library with Next.js, but the styling was applied as expected.
+
+This problem has been acknowledged by both libraries and it seems to be an issue coming from Material-UI. To overcome this issue I had to remove "reactStrictMode: true," line from next.config.js.
+
+Have a similar issue in your setup? This is where I found answers:
+[Box component odd behavior on Next.js](https://github.com/mui-org/material-ui/issues/19679)
