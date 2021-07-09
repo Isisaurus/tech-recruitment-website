@@ -15,7 +15,10 @@ const fetcher = async (query, page) => {
 };
 
 export async function getStaticProps() {
-  const content = await fetcher();
+  const content = await fetcher(
+    { cities: [], jobTypes: [], queryStr: [], lte: [], gte: [] },
+    1
+  );
   const values = await ContentfulApi.getValues();
 
   return {
@@ -33,13 +36,13 @@ export default function Vacancies({ content, values }) {
   const [queryStr, setQueryStr] = useState([]);
   const [cities, setCities] = useState([]);
   const [jobTypes, setJobTypes] = useState([]);
-  const [query, setQuery] = useState({});
-  const [shouldFetch, setShouldFetch] = useState(false);
+  const [query, setQuery] = useState({ cities, jobTypes, queryStr, lte, gte });
+
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, error } = useSWR(
-    () => (shouldFetch ? [query, currentPage] : [{}, 1]),
-    (cities, page) => fetcher(cities, page),
+    [query, currentPage],
+    (query, page) => fetcher(query, page),
     {
       initialData: content,
       shouldRetryOnError: false,
@@ -128,7 +131,6 @@ export default function Vacancies({ content, values }) {
           onClick={() => {
             setQuery({ cities, jobTypes, queryStr, lte, gte });
             setCurrentPage(1);
-            setShouldFetch(true);
           }}
         >
           SET QUERY
@@ -138,8 +140,8 @@ export default function Vacancies({ content, values }) {
             <button
               key={num}
               onClick={() => {
+                setQuery({ cities, jobTypes, queryStr, lte, gte });
                 setCurrentPage(num);
-                setShouldFetch(true);
               }}
             >
               {num}

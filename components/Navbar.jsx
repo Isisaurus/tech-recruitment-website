@@ -13,7 +13,6 @@ const useStyles = makeStyles({
   AppBar: {
     boxShadow: 'none',
     marginTop: '1rem',
-    padding: '0 1rem',
   },
   logo: {
     marginRight: '2em',
@@ -48,7 +47,7 @@ function Navbar() {
   const classes = useStyles();
   return (
     <AppBar position="static" color="transparent" className={classes.AppBar}>
-      <Toolbar component={Box}>
+      <Toolbar style={{ padding: '0' }}>
         <Link href="/">
           <a className={classes.link}>
             <Typography component="h1" className={classes.logo}>
