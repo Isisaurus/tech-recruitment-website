@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     marginRight: '2em',
     fontSize: '1.5rem',
     filter: 'none',
-    background: 'linear-gradient( 180deg , #1E8DFF, #BE6CFF)',
+    background: 'linear-gradient( 90deg , #1E8DFF, #BE6CFF)',
     fontWeight: 700,
     WebkitTextFillColor: 'transparent',
     WebkitBackgroundClip: 'text',

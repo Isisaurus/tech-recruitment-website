@@ -8,7 +8,13 @@ import Select from 'react-select';
 import useSWR from 'swr';
 import JobList from '../../components/JobList';
 
-import { Container, Box } from '@material-ui/core';
+import {
+  Container,
+  Box,
+  Button,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 
 const fetcher = async (query, page) => {
   const res = await ContentfulApi.callContentful(query, page);
@@ -32,7 +38,68 @@ export async function getStaticProps() {
   };
 }
 
+const useStyles = makeStyles((theme) => ({
+  paginationButton: {
+    padding: '.5em',
+    color: '#7a7a7a',
+    '&:hover': {
+      background: 'none',
+      color: '#333',
+    },
+  },
+  header: {
+    height: '40vh',
+    maxHeight: '20rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  searchContainer: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+    },
+  },
+  searchInput: {
+    outline: 'none',
+    border: 'none',
+    borderBottom: '2px solid #7a7a7a',
+    padding: '.5rem 1rem .5rem 0',
+    textAlign: 'left',
+    fontSize: '1rem',
+    width: '20rem',
+    maxWidth: '100%',
+
+    '&:focus': {
+      borderBottom: '2px solid #0467B1',
+    },
+    '&::placeholder': {
+      color: '#7a7a7a',
+      opacity: '.8',
+    },
+  },
+  searchButton: {
+    margin: '0',
+    paddingBottom: '.3rem',
+    borderBottom: '2px solid #7a7a7a',
+    borderRadius: 0,
+    '&:hover': {
+      borderBottom: '2px solid #0467B1',
+    },
+    [theme.breakpoints.down('xs')]: {
+      borderBottom: '2px solid transparent',
+      marginTop: '1rem',
+      padding: '.3rem 0rem',
+    },
+  },
+}));
+
 export default function Vacancies({ content, values }) {
+  const classes = useStyles();
+
+  // Filter form states
   const [gte, setGte] = useState([]);
   const [lte, setLte] = useState([]);
   const [queryStr, setQueryStr] = useState([]);
@@ -41,6 +108,7 @@ export default function Vacancies({ content, values }) {
   const [query, setQuery] = useState({ cities, jobTypes, queryStr, lte, gte });
   const [currentPage, setCurrentPage] = useState(1);
 
+  // SWR hook
   const { data, error, isValidating } = useSWR(
     () => [query, currentPage],
     (query, currentPage) => fetcher(query, currentPage),
@@ -51,9 +119,8 @@ export default function Vacancies({ content, values }) {
     }
   );
 
-  const totalPages = Math.ceil(data.total / 6);
-
   // pagination buttons
+  const totalPages = Math.ceil(data.total / 6);
   const createPagination = (total) => {
     let i = 0;
     let arr = [];
@@ -86,7 +153,45 @@ export default function Vacancies({ content, values }) {
   if (data)
     return (
       <Box>
-        <Box>
+        <Container className={classes.header}>
+          <Typography variant="h1">
+            Wind nu jouw <br /> droombaan.
+          </Typography>
+        </Container>
+        <Container style={{ marginTop: '2rem', marginBottom: '4rem' }}>
+          <form
+            className={classes.searchContainer}
+            onSubmit={(e) => {
+              e.preventDefault();
+              const queryStr = document.getElementById('queryStr').value;
+              setQueryStr(queryStr);
+              setQuery({
+                cities: [],
+                jobTypes: [],
+                queryStr,
+                lte: [],
+                gte: [],
+              });
+            }}
+          >
+            <input
+              className={classes.searchInput}
+              type="search"
+              placeholder="Zoek functie, organisatie of locatie."
+              name="queryStr"
+              id="queryStr"
+            />
+            <Button
+              color="primary"
+              variant="text"
+              className={classes.searchButton}
+              type="submit"
+            >
+              Zoek vacatures
+            </Button>
+          </form>
+        </Container>
+        <Container>
           <div style={{ margin: '2em 0' }}>
             <Select
               options={values.cities}
@@ -111,16 +216,6 @@ export default function Vacancies({ content, values }) {
                 setJobTypes(val);
               }}
               isMulti
-            />
-          </div>
-          <div style={{ margin: '2em 0' }}>
-            <input
-              type="search"
-              name="queryStr"
-              id="queryStr"
-              onChange={(e) => {
-                setQueryStr(e.target.value);
-              }}
             />
           </div>
           <div style={{ margin: '2em 0' }}>
@@ -164,21 +259,23 @@ export default function Vacancies({ content, values }) {
           >
             CLEAR QUERY
           </button>
-        </Box>
-        <div>
+        </Container>
+        <Container style={{ marginTop: '2rem' }}>
+          <JobList jobs={data.items} />
+        </Container>
+        <Container style={{ margin: '2rem 0' }}>
           {pageArr.map((num) => (
-            <button
+            <Button
+              size="medium"
               key={num}
+              className={classes.paginationButton}
               onClick={() => {
                 setCurrentPage(num);
               }}
             >
               {num}
-            </button>
+            </Button>
           ))}
-        </div>
-        <Container style={{ marginTop: '2rem' }}>
-          <JobList jobs={data.items} />
         </Container>
       </Box>
     );
