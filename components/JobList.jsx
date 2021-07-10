@@ -1,9 +1,16 @@
 import JobCard from './JobCard';
 
-import { Grid } from '@material-ui/core';
+import { Grid, Container, Typography } from '@material-ui/core';
 
 export default function JobList({ jobs }) {
-  if (!jobs.length) return <div>No match found.</div>;
+  if (!jobs.length)
+    return (
+      <Container style={{ minHeight: '40vh' }}>
+        <Typography variant="subtitle2" style={{ fontSize: '1rem' }}>
+          Sorry! No matches found.
+        </Typography>
+      </Container>
+    );
 
   return (
     <Grid container spacing={6} alignItems="flex-start" justifyContent="center">

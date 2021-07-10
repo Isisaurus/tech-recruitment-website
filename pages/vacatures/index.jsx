@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { createClient } from 'contentful';
 import { ContentfulApi } from '../../utils/contentful';
 import Error from './../../components/Error';
+import FilterForm from '../../components/FilterForm';
 
 import Select from 'react-select';
 
@@ -14,6 +15,7 @@ import {
   Button,
   makeStyles,
   Typography,
+  CircularProgress,
 } from '@material-ui/core';
 
 const fetcher = async (query, page) => {
@@ -34,7 +36,7 @@ export async function getStaticProps() {
       content,
       values,
     },
-    // revalidate: 1,
+    revalidate: 1,
   };
 }
 
@@ -100,12 +102,15 @@ export default function Vacancies({ content, values }) {
   const classes = useStyles();
 
   // Filter form states
-  const [gte, setGte] = useState([]);
-  const [lte, setLte] = useState([]);
   const [queryStr, setQueryStr] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [jobTypes, setJobTypes] = useState([]);
-  const [query, setQuery] = useState({ cities, jobTypes, queryStr, lte, gte });
+
+  const [query, setQuery] = useState({
+    cities: [],
+    jobTypes: [],
+    queryStr,
+    lte: [],
+    gte: [],
+  });
   const [currentPage, setCurrentPage] = useState(1);
 
   // SWR hook
@@ -133,150 +138,93 @@ export default function Vacancies({ content, values }) {
   const pageArr = createPagination(totalPages);
 
   const clearQuery = () => {
-    setGte([]);
-    setLte([]);
-    setQueryStr([]);
-    setCities([]);
-    setJobTypes([]);
     setCurrentPage(1);
     setQuery({ cities: [], jobTypes: [], queryStr: [], lte: [], gte: [] });
   };
 
-  // console.log(isValidating);
-  // // console.log(data);
-  // console.log(query);
-
   if (error) return <Error />;
 
-  if (isValidating) return <div>Loading...</div>;
+  return (
+    <Box>
+      <Container className={classes.header}>
+        <Typography variant="h1">
+          Wind nu jouw <br /> droombaan.
+        </Typography>
+      </Container>
+      <Container style={{ marginTop: '2rem', marginBottom: '4rem' }}>
+        <form
+          className={classes.searchContainer}
+          onSubmit={(e) => {
+            e.preventDefault();
+            const queryStr = document.getElementById('queryStr').value;
+            setQueryStr(queryStr);
+            setQuery({
+              cities: [],
+              jobTypes: [],
+              queryStr,
+              lte: [],
+              gte: [],
+            });
+          }}
+        >
+          <input
+            className={classes.searchInput}
+            type="search"
+            placeholder="Zoek functie, organisatie of locatie."
+            name="queryStr"
+            id="queryStr"
+          />
+          <Button
+            color="primary"
+            variant="text"
+            className={classes.searchButton}
+            type="submit"
+          >
+            Zoek vacatures
+          </Button>
+        </form>
+      </Container>
 
-  if (data)
-    return (
-      <Box>
-        <Container className={classes.header}>
-          <Typography variant="h1">
-            Wind nu jouw <br /> droombaan.
-          </Typography>
-        </Container>
-        <Container style={{ marginTop: '2rem', marginBottom: '4rem' }}>
-          <form
-            className={classes.searchContainer}
-            onSubmit={(e) => {
-              e.preventDefault();
-              const queryStr = document.getElementById('queryStr').value;
-              setQueryStr(queryStr);
-              setQuery({
-                cities: [],
-                jobTypes: [],
-                queryStr,
-                lte: [],
-                gte: [],
-              });
+      <FilterForm
+        handleClearQuery={clearQuery}
+        handleSetQuery={(obj) => {
+          console.log(obj);
+          setQuery(obj);
+        }}
+        values={values}
+      />
+
+      <Container style={{ marginTop: '2rem' }}>
+        {isValidating ? (
+          <Box
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: '2rem',
+              marginBottom: '2rem',
             }}
           >
-            <input
-              className={classes.searchInput}
-              type="search"
-              placeholder="Zoek functie, organisatie of locatie."
-              name="queryStr"
-              id="queryStr"
-            />
-            <Button
-              color="primary"
-              variant="text"
-              className={classes.searchButton}
-              type="submit"
-            >
-              Zoek vacatures
-            </Button>
-          </form>
-        </Container>
-        <Container>
-          <div style={{ margin: '2em 0' }}>
-            <Select
-              options={values.cities}
-              getOptionLabel={(city) => city}
-              getOptionValue={(city) => city}
-              instanceId="cities"
-              placeholder="Filter by cities.."
-              onChange={(val) => {
-                setCities(val);
-              }}
-              isMulti
-            />
-          </div>
-          <div style={{ margin: '2em 0' }}>
-            <Select
-              options={values.jobTypes}
-              getOptionLabel={(type) => type}
-              getOptionValue={(type) => type}
-              instanceId="jobTypes"
-              placeholder="Filter by job type..."
-              onChange={(val) => {
-                setJobTypes(val);
-              }}
-              isMulti
-            />
-          </div>
-          <div style={{ margin: '2em 0' }}>
-            <label htmlFor="gte">More than equal</label>
-            <input
-              type="number"
-              name="gte"
-              id="gte"
-              onChange={(e) => {
-                setGte(e.target.value);
-              }}
-            />
-          </div>
-          <div style={{ margin: '2em 0' }}>
-            <label htmlFor="lte">Less than equal</label>
-            <input
-              type="number"
-              name="lte"
-              id="lte"
-              onChange={(e) => {
-                setLte(e.target.value);
-              }}
-            />
-          </div>
-          <button
-            style={{ margin: '2em 0' }}
-            onClick={(e) => {
-              e.preventDefault();
-              setCurrentPage(1);
-              setQuery({ cities, jobTypes, queryStr, lte, gte });
-            }}
-          >
-            SET QUERY
-          </button>
-          <button
-            style={{ margin: '2em 0' }}
-            onClick={(e) => {
-              e.preventDefault();
-              clearQuery();
-            }}
-          >
-            CLEAR QUERY
-          </button>
-        </Container>
-        <Container style={{ marginTop: '2rem' }}>
+            <CircularProgress />
+          </Box>
+        ) : (
           <JobList jobs={data.items} />
-        </Container>
-        <Container style={{ margin: '2rem 0' }}>
-          {pageArr.map((num) => (
-            <Button
-              size="medium"
-              key={num}
-              className={classes.paginationButton}
-              onClick={() => {
-                setCurrentPage(num);
-              }}
-            >
-              {num}
-            </Button>
-          ))}
-        </Container>
-      </Box>
-    );
+        )}
+      </Container>
+      <Container style={{ marginTop: '2rem', MarginBottom: '2rem' }}>
+        {pageArr.map((num) => (
+          <Button
+            size="medium"
+            key={num}
+            className={classes.paginationButton}
+            onClick={() => {
+              setCurrentPage(num);
+            }}
+          >
+            {num}
+          </Button>
+        ))}
+      </Container>
+    </Box>
+  );
 }
