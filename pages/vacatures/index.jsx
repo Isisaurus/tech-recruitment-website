@@ -188,7 +188,6 @@ export default function Vacancies({ content, values }) {
       <FilterForm
         handleClearQuery={clearQuery}
         handleSetQuery={(obj) => {
-          console.log(obj);
           setQuery(obj);
         }}
         values={values}

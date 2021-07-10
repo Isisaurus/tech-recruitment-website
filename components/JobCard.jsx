@@ -14,10 +14,13 @@ import {
   Button,
 } from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   thumbnail: {
-    width: '400px',
+    width: '500px',
     height: '200px',
+    [theme.breakpoints.down('xs')]: {
+      height: '150px',
+    },
   },
   Card: {
     boxShadow: '-.5rem 1rem 2rem rgba(0,0,0, .15)',
@@ -42,7 +45,7 @@ const useStyles = makeStyles({
     display: 'flex',
     marginTop: 'auto',
   },
-});
+}));
 
 export default function JobCard({ job }) {
   const {

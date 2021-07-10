@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonsContainer: {
     marginTop: '4rem',
-    marginBottom: '2rem',
+    marginBottom: '1rem',
     display: 'flex',
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '2rem',
     [theme.breakpoints.down('xs')]: {
       margin: 0,
-      marginBottom: '2rem',
+      marginBottom: '1rem',
     },
   },
 }));
