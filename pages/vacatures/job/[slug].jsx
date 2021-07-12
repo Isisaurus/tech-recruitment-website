@@ -1,12 +1,14 @@
+import { useState } from 'react';
+
 import { createClient } from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import Image from 'next/image';
+
 import Skeleton from '../../../components/Skeleton';
 import { makeStyles } from '@material-ui/core';
 
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import WatchLaterOutlinedIcon from '@material-ui/icons/WatchLaterOutlined';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 import {
   Box,
   Container,
@@ -18,6 +20,7 @@ import {
   Grid,
   TextField,
   Input,
+  InputLabel,
 } from '@material-ui/core';
 
 const client = createClient({
@@ -145,19 +148,38 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   fileInput: {
-    '&::-webkit-file-upload-button': {
-      visibility: 'hidden',
+    '& > input[type="file" i]': {
+      '&::-webkit-file-upload-button': {
+        visibility: 'hidden',
+        width: '0',
+      },
     },
-    '#file-upload-button': {
-      visibility: 'hidden',
-    },
+    marginTop: '2rem',
+    marginBottom: '2rem',
+  },
+  TextField: {
+    marginTop: '2rem',
+    marginBottom: '2rem',
+  },
+  message: {
+    background: 'rgba(4,103,177, .1)',
+    color: '#333',
+    padding: '1em 3em',
+    marginTop: '2rem',
+    marginBottom: '2rem',
   },
 }));
 
 export default function VacancyDetails({ job }) {
+  const [submit, setSubmit] = useState(false);
   const classes = useStyles();
-  const handleSubmit = () => {
-    console.log('Submitted!');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    document.getElementById('soliciteer-form').reset();
+    setSubmit(true);
+    setTimeout(() => {
+      setSubmit(false);
+    }, 5000);
   };
 
   if (!job) return <Skeleton />;
@@ -174,100 +196,154 @@ export default function VacancyDetails({ job }) {
     city,
   } = job.fields;
   // console.log(job);
+
   return (
-    <Box style={{ marginTop: '4rem' }}>
-      <Box className={classes.thumbnailContainer}>
-        <CardMedia
-          image={`https:${thumbnail.fields.file.url}`}
-          className={classes.thumbnail}
-        />
-        <Container className={classes.overview}>
-          <Typography variant="body1">{company}</Typography>
-          <Typography variant="h1" component="h1" className={classes.h1}>
-            {jobTitle}
+    <>
+      <Box style={{ marginTop: '4rem', marginBottom: '4rem' }}>
+        <Box className={classes.thumbnailContainer}>
+          <CardMedia
+            image={`https:${thumbnail.fields.file.url}`}
+            className={classes.thumbnail}
+          />
+          <Container className={classes.overview}>
+            <Typography variant="body1">{company}</Typography>
+            <Typography variant="h1" component="h1" className={classes.h1}>
+              {jobTitle}
+            </Typography>
+            <Box className={classes.labelContainer}>
+              <Button
+                size="large"
+                className={classes.labelButton}
+                style={{ color: 'white' }}
+                disabled
+                startIcon={<LocationOnOutlinedIcon />}
+              >
+                {city}
+              </Button>
+              <Button
+                size="large"
+                className={classes.labelButton}
+                style={{ color: 'white' }}
+                disabled
+                startIcon={<WatchLaterOutlinedIcon />}
+              >
+                {jobType}
+              </Button>
+              <Typography
+                className={classes.labelButton}
+              >{`~ ${salaryIndication} / maand`}</Typography>
+            </Box>
+          </Container>
+        </Box>
+        <Container className={classes.container}>
+          <Paper className={classes.paper}>
+            <Typography paragraph component="div">
+              {documentToReactComponents(details)}
+            </Typography>
+          </Paper>
+        </Container>
+        <Container style={{ marginTop: '6rem' }}>
+          <Typography variant="h1" component="h2" className={classes.h1}>
+            Vereisten
           </Typography>
-          <Box className={classes.labelContainer}>
-            <Button
-              size="small"
-              className={classes.labelButton}
-              style={{ color: 'white' }}
-              disabled
-              startIcon={<LocationOnOutlinedIcon />}
+          <div>
+            <Typography component="ul" className={classes.ul}>
+              {requirements.map((req, i) => (
+                <ListItem component="li" key={i} divider>
+                  {req}
+                </ListItem>
+              ))}
+            </Typography>
+          </div>
+        </Container>
+        <Container style={{ marginTop: '4rem', marginBottom: '4rem' }}>
+          <Typography component="h2" variant="h1" className={classes.h1}>
+            Soliciteer
+          </Typography>
+          <Container>
+            <Grid
+              container
+              component="form"
+              id="soliciteer-form"
+              onSubmit={handleSubmit}
+              spacing={6}
             >
-              {city}
-            </Button>
-            <Button
-              size="small"
-              className={classes.labelButton}
-              style={{ color: 'white' }}
-              disabled
-              startIcon={<WatchLaterOutlinedIcon />}
-            >
-              {jobType}
-            </Button>
-            <Typography
-              className={classes.labelButton}
-            >{`~ ${salaryIndication} / maand`}</Typography>
-          </Box>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                style={{ display: 'flex', flexDirection: 'column' }}
+              >
+                <TextField
+                  id="name"
+                  label="Full Naam"
+                  variant="standard"
+                  type="text"
+                  required
+                  className={classes.TextField}
+                />
+                <TextField
+                  id="email"
+                  label="Email Adres"
+                  variant="standard"
+                  type="email"
+                  required
+                  className={classes.TextField}
+                />
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                style={{ display: 'flex', flexDirection: 'column' }}
+              >
+                <InputLabel component="label" htmlFor="cv">
+                  Upload your CV*
+                </InputLabel>
+                <Input
+                  id="cv"
+                  name="cv"
+                  color="primary"
+                  variant="outlined"
+                  type="file"
+                  className={classes.fileInput}
+                  accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  required
+                />
+                {motivationLetter ? (
+                  <>
+                    <InputLabel component="label" htmlFor="motivation">
+                      Upload your motivation*
+                    </InputLabel>
+                    <Input
+                      id="motivation"
+                      name="motivation"
+                      color="primary"
+                      variant="outlined"
+                      type="file"
+                      className={classes.fileInput}
+                      accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                      required
+                    />
+                  </>
+                ) : null}
+              </Grid>
+              <Grid item sx={12}>
+                <Button type="submit" variant="outlined" color="primary">
+                  Soliciteer
+                </Button>
+              </Grid>
+            </Grid>
+          </Container>
+          {submit ? (
+            <Box className={classes.message}>
+              <Typography variant="subtitle2">
+                Thank you for your application! We will get back to you soon.
+              </Typography>
+            </Box>
+          ) : null}
         </Container>
       </Box>
-      <Container className={classes.container}>
-        <Paper className={classes.paper}>
-          <Typography paragraph component="div">
-            {documentToReactComponents(details)}
-          </Typography>
-        </Paper>
-      </Container>
-      <Container style={{ marginTop: '6rem' }}>
-        <Typography variant="h1" component="h2" className={classes.h1}>
-          Vereisten
-        </Typography>
-        <div>
-          <Typography component="ul" className={classes.ul}>
-            {requirements.map((req, i) => (
-              <ListItem component="li" key={i} divider>
-                {req}
-              </ListItem>
-            ))}
-          </Typography>
-        </div>
-      </Container>
-      <Container>
-        <Typography component="h2" variant="h1" className={classes.h1}>
-          Soliciteer
-        </Typography>
-        <Grid container component="form" onSubmit={handleSubmit}>
-          <Grid
-            item
-            xs={12}
-            sm={6}
-            style={{ display: 'flex', flexDirection: 'column' }}
-          >
-            <TextField
-              id="name"
-              label="Full Naam"
-              variant="outlined"
-              type="text"
-              required
-            />
-            <TextField
-              id="email"
-              label="Email Adres"
-              variant="outlined"
-              type="email"
-              required
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              className={classes.fileInput}
-              variant="outlined"
-              type="file"
-              required
-            />
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
+    </>
   );
 }
