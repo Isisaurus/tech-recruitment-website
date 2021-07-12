@@ -101,14 +101,6 @@ export default function JobCard({ job }) {
                 </Button>
               </Box>
             </CardContent>
-            {/* <Image
-              loader={myLoader}
-              src={thumbnail.fields.file.url}
-              width={thumbnail.fields.file.details.image.width}
-              height={200}
-              alt={`${jobTitle} thumbnail`}
-              className={classes.thumbnail}
-            /> */}
           </Card>
         </a>
       </Link>
