@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react';
-import { createClient } from 'contentful';
+import { useState } from 'react';
 import { ContentfulApi } from '../../utils/contentful';
 import Error from './../../components/Error';
 import FilterForm from '../../components/FilterForm';
-
-import Select from 'react-select';
 
 import useSWR from 'swr';
 import JobList from '../../components/JobList';
@@ -49,12 +46,20 @@ const useStyles = makeStyles((theme) => ({
       color: '#333',
     },
   },
+  h1: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '2.5rem',
+    },
+  },
   header: {
     height: '40vh',
     maxHeight: '20rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    [theme.breakpoints.down('xs')]: {
+      maxHeight: '13rem',
+    },
   },
   searchContainer: {
     display: 'flex',
@@ -147,7 +152,7 @@ export default function Vacancies({ content, values }) {
   return (
     <Box>
       <Container className={classes.header}>
-        <Typography variant="h1">
+        <Typography variant="h1" component="h1" className={classes.h1}>
           Wind nu jouw <br /> droombaan.
         </Typography>
       </Container>

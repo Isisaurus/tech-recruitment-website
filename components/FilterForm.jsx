@@ -87,7 +87,6 @@ export default function FilterForm({
   return (
     <Container>
       <Accordion
-        defaultExpanded
         style={{
           background: 'rgba(122,122,122, 0.08)',
           boxShadow: 'none',
