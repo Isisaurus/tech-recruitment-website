@@ -30,6 +30,9 @@ const theme = createTheme({
       WebkitTextFillColor: 'transparent',
       filter: 'drop-shadow(0.1rem 0.5rem .5rem rgba(0,0,0, .15))',
     },
+    body1: {
+      lineHeight: '2',
+    },
   },
 });
 
