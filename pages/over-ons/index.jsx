@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import {
   Container,
   Box,
@@ -5,6 +7,9 @@ import {
   makeStyles,
   Link,
   CardMedia,
+  Grid,
+  Hidden,
+  Divider,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,11 +33,32 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '2rem',
     },
   },
+  teamMem: {
+    marginTop: '2rem',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    marginTop: '2rem',
+    padding: '0 4rem',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0 2rem',
+    },
+    [theme.breakpoints.down('xs')]: {
+      padding: '0',
+    },
+  },
+  name: {
+    marginBottom: '.5em',
+  },
+  teamMemImageCont: {
+    [theme.breakpoints.down('xs')]: {
+      order: '-1',
+    },
+  },
 }));
 
 export default function OverOns({ team }) {
   const classes = useStyles();
-  console.log(team);
+
   return (
     <Box>
       <Container className={classes.header}>
@@ -72,6 +98,66 @@ export default function OverOns({ team }) {
             Video by Shabbir Hossain from Pexels
           </Typography>
         </Link>
+      </Container>
+      <Container style={{ marginTop: '4rem', marginBottom: '4rem' }}>
+        {team.map((mem, i) =>
+          i % 2 !== 0 ? (
+            <Grid container key={i} spacing={6} className={classes.teamMem}>
+              <Grid item xs={12} sm={6}>
+                <Typography variant="h6" className={classes.name}>
+                  {mem.name}
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  style={{ marginBottom: '1em', color: '#7a7a7a' }}
+                >
+                  {mem.title}
+                </Typography>
+                <Typography paragraph variant="body2">
+                  {mem.introduction}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                classes={{ root: `${classes.teamMemImageCont}` }}
+              >
+                <Image
+                  src={`/team/${mem.picture}`}
+                  alt={`${mem.name}`}
+                  width={400}
+                  height={400}
+                ></Image>
+              </Grid>
+            </Grid>
+          ) : (
+            <Grid container key={i} spacing={6} className={classes.teamMem}>
+              <Grid item xs={12} sm={6}>
+                <Image
+                  src={`/team/${mem.picture}`}
+                  alt={`${mem.name}`}
+                  width={400}
+                  height={400}
+                ></Image>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Typography variant="h6" className={classes.name}>
+                  {mem.name}
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  style={{ marginBottom: '1em', color: '#7a7a7a' }}
+                >
+                  {mem.title}
+                </Typography>
+                <Typography paragraph variant="body2">
+                  {mem.introduction}
+                </Typography>
+              </Grid>
+            </Grid>
+          )
+        )}
       </Container>
     </Box>
   );
