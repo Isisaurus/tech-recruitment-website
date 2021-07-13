@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   subscribeContent: {
     display: 'flex',
     alignItems: 'flex-end',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
       alignItems: 'flex-start',
     },
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       borderBottom: '2px solid #0467B1',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       borderBottom: '2px solid transparent',
       marginTop: '1rem',
       padding: '.3rem 0rem',

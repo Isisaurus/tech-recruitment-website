@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   header: {
     marginTop: '4rem',
     marginBottom: '4rem',
+    padding: 'inherit 0',
   },
   link: {
     textDecoration: 'none',
@@ -28,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
   headerContent: {
     marginTop: '4rem',
     marginLeft: '4rem',
+    width: 'auto',
+    padding: '0',
     maxWidth: '45rem',
     [theme.breakpoints.down('sm')]: {
       marginLeft: '2rem',
@@ -43,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
       padding: '0 2rem',
     },
     [theme.breakpoints.down('xs')]: {
-      padding: '0',
+      padding: '1rem',
+      justifyContent: 'center',
     },
   },
   name: {
@@ -102,7 +106,7 @@ export default function OverOns({ team }) {
       <Container style={{ marginTop: '4rem', marginBottom: '4rem' }}>
         {team.map((mem, i) =>
           i % 2 !== 0 ? (
-            <Grid container key={i} spacing={6} className={classes.teamMem}>
+            <Grid container key={i} spacing={4} className={classes.teamMem}>
               <Grid item xs={12} sm={6}>
                 <Typography variant="h6" className={classes.name}>
                   {mem.name}
@@ -132,7 +136,7 @@ export default function OverOns({ team }) {
               </Grid>
             </Grid>
           ) : (
-            <Grid container key={i} spacing={6} className={classes.teamMem}>
+            <Grid container key={i} spacing={4} className={classes.teamMem}>
               <Grid item xs={12} sm={6}>
                 <Image
                   src={`/team/${mem.picture}`}

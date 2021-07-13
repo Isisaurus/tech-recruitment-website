@@ -13,7 +13,7 @@ export default function JobList({ jobs }) {
     );
 
   return (
-    <Grid container spacing={6} alignItems="flex-start" justifyContent="center">
+    <Grid container spacing={4} alignItems="flex-start" justifyContent="center">
       {jobs.map((job) => (
         <JobCard key={job.sys.id} job={job} />
       ))}

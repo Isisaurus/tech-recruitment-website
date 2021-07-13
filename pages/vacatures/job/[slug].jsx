@@ -195,7 +195,6 @@ export default function VacancyDetails({ job }) {
     jobType,
     city,
   } = job.fields;
-  // console.log(job);
 
   return (
     <>
