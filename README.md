@@ -52,7 +52,7 @@ The website allows you to:
 - get a visual feedback after submitting any form
 - sign up to a mailing list
 - contact the agency using a contact form
-- get a custom 404 and error page with meaningful information about the problem occured and redirect to hom page after 3 seconds
+- get a custom 404 and error page with meaningful information about the problem occured and redirect to hom page after 4 seconds
 
 ## Technologies used to create the project
 
