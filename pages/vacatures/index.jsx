@@ -78,6 +78,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1rem',
     width: '20rem',
     maxWidth: '100%',
+    background: 'transparent',
+    fontFamily: 'inherit',
+    color: 'inherit',
 
     '&:focus': {
       borderBottom: '2px solid #0467B1',
