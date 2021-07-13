@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { Box, Typography, Button, Container } from '@material-ui/core';
+
 function Error() {
   const router = useRouter();
 
@@ -11,16 +13,41 @@ function Error() {
   }, [router]);
 
   return (
-    <div>
-      <h1>Sorry...</h1>
-      <p>
-        Something went wrong. This is a problem on our end. We are taking you
-        back to the <Link href="/">Homepage</Link> in a sec...
-      </p>
-      <div>
-        <Link href="/">Go to Homepage</Link>
-      </div>
-    </div>
+    <Box>
+      <Container
+        style={{ minHeight: '25rem', marginTop: '2rem', height: '80vh' }}
+      >
+        <Typography variant="h2">Sorry...</Typography>
+
+        <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+          <Typography variant="body1">
+            This is a problem on our end. We are taking you to the{' '}
+            <Link href="/">
+              <a
+                style={{
+                  textDecoration: 'none',
+                  color: 'inherit',
+                }}
+              >
+                Homepage
+              </a>
+            </Link>
+            ...
+          </Typography>
+        </div>
+        <Button
+          variant="outlined"
+          color="primary"
+          style={{ marginTop: '1rem', marginBottom: '1rem' }}
+        >
+          <Link href="/">
+            <a style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Typography variant="button">Got to Homepage</Typography>
+            </a>
+          </Link>
+        </Button>
+      </Container>
+    </Box>
   );
 }
 
