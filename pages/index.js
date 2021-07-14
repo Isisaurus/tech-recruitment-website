@@ -412,7 +412,7 @@ export default function Home() {
       </Container>
       <Container className={classes.testemonials}>
         <Grid container spacing={4} alignItems="center">
-          <Grid item sm={12} md={6}>
+          <Grid item xs={12} sm={6}>
             <AutoPlaySwipeableViews
               axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
               index={activeStep}
@@ -462,8 +462,8 @@ export default function Home() {
               }
             />
           </Grid>
-          <Grid item sm={12} md={6}>
-            <Hidden smDown implementation="css">
+          <Grid item xs={12} sm={6}>
+            <Hidden xsDown implementation="css">
               <Testemonial
                 step={
                   testemonials[nextStep]

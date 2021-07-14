@@ -100,7 +100,7 @@ The following features implemented would improve the usability and user experien
 
 ## Inspiration
 
-The design of the project was inspired by the website of (Codecareer IT recruitment agency)[https://codecareer.nl/].
+The design of the project was inspired by the website of [Codecareer IT recruitment agency](https://codecareer.nl/).
 
 ## Solutions and considerations
 
