@@ -4,8 +4,10 @@ import {
   Box,
   Container,
   Button,
+  Grid,
 } from '@material-ui/core';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const useStyles = makeStyles((theme) => ({
   hero: {
@@ -39,8 +41,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   h1: {
-    textAlign: 'center',
-    color: 'white',
     [theme.breakpoints.down('xs')]: {
       fontSize: '2.5rem',
     },
@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
       height: '100%',
       width: '100%',
       minWidth: '100%',
+    },
+    [theme.breakpoints.down('xs')]: {
+      height: '8vh',
     },
   },
   circle1: {
@@ -121,15 +124,67 @@ const useStyles = makeStyles((theme) => ({
       'linear-gradient(215deg, rgba(84,151,208,1) 0%, rgba(104,186,255,1) 19%, rgba(18,99,168,1) 80%)',
     boxShadow: '-.5rem 1rem 1.5rem rgba(0,0,0, .3)',
     [theme.breakpoints.down('xs')]: {
-      width: '10vw',
-      height: '10vw',
+      width: '15vw',
+      height: '15vw',
       maxWidth: '4rem',
       maxHeight: '4rem',
+      right: '0%',
     },
+  },
+  paragraph: {
+    padding: '1rem 2rem',
+    [theme.breakpoints.down('xs')]: {
+      padding: '0',
+    },
+  },
+  groupPicContainer: {
+    position: 'relative',
+    width: '100%',
+    maxWidth: '30rem',
+    height: '50vh',
+    maxHeight: '30rem',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    background: 'url(/homepage/group_img.jpg)',
+    marginTop: '4rem',
+  },
+  purplecircle2: {
+    position: 'absolute',
+    zIndex: '1',
+    top: '-5%',
+    left: '5%',
+    width: '10vw',
+    height: '10vw',
+    maxWidth: '4rem',
+    maxHeight: '4rem',
+    borderRadius: '50%',
+    background:
+      'linear-gradient(125deg, rgba(175,124,215,1) 0%, rgba(207,146,255,1) 19%, rgba(110,25,176,1) 80%)',
+    boxShadow: '.3rem .5rem .8rem rgba(0,0,0, .25)',
+  },
+  bluecircle2: {
+    position: 'absolute',
+    zIndex: '1',
+    top: '-15%',
+    left: '25%',
+    width: '20vw',
+    height: '20vw',
+    maxWidth: '6rem',
+    maxHeight: '6rem',
+    borderRadius: '50%',
+    boxShadow: '.3rem .5rem .8rem rgba(0,0,0, .25)',
+    background:
+      'linear-gradient(rgba(104,186,255,1) 19%, rgba(18,99,168,1) 85%)',
+  },
+  groupPicture: {
+    minWidth: '100%',
+    width: 'auto',
+    height: 'auto',
   },
 }));
 
-export default function Home() {
+export default function Home({ contact }) {
   const classes = useStyles();
   return (
     <Box>
@@ -138,7 +193,11 @@ export default function Home() {
           <div className={classes.purpleCircle}></div>
         </div>
         <div className={classes.heroContent}>
-          <Typography variant="h1" className={classes.h1}>
+          <Typography
+            variant="h1"
+            className={classes.h1}
+            style={{ color: 'white', maxWidth: '55rem', textAlign: 'center' }}
+          >
             Maak alvast kennis met jeuw nieuwe baan.
           </Typography>
 
@@ -177,27 +236,86 @@ export default function Home() {
         </div>
       </div>
       <Container style={{ marginTop: '4rem' }}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic facere
-        aliquid, maxime doloremque nemo odit omnis reiciendis ex unde recusandae
-        iure itaque in labore. Fuga, autem dolorum a esse, quidem quam quisquam
-        officia accusamus vel at dicta nisi velit cumque adipisci sunt veniam
-        laborum necessitatibus minima nulla ut nam impedit placeat. Voluptate
-        quisquam ipsam ipsa, saepe consectetur corporis dolorem harum neque
-        veniam rem officia quae vel modi sit ex error. Non, maxime. Explicabo
-        sit dolores ut eius asperiores numquam natus quod maxime quis cum
-        expedita ipsam harum qui quibusdam veniam suscipit id, ex esse
-        laudantium fuga a reiciendis aut. Odit dolore adipisci enim aliquid.
-        Quia laboriosam hic accusamus iure quisquam. Alias quasi quibusdam hic
-        recusandae error. Tempora veritatis mollitia nulla velit cumque?
-        Tempora, nemo rerum? Illum in id et culpa error voluptas adipisci ipsam
-        tenetur repellendus quo labore, est sequi quisquam maxime officia
-        exercitationem dignissimos odit quibusdam hic fugit! Repellat, quisquam
-        doloremque neque omnis illum aspernatur corporis incidunt iure dolores.
-        Harum natus tenetur quod ducimus deleniti nam repellendus vitae cum
-        laborum rem nihil hic earum repudiandae aperiam aspernatur ullam autem
-        quia velit, reprehenderit magnam inventore! Molestiae labore eveniet
-        mollitia, facilis voluptate repellendus hic accusamus maxime inventore
-        iste ut. Suscipit, sequi.
+        <Typography variant="h1" className={classes.h1} color="textPrimary">
+          Vind talent. Behoud talent.
+        </Typography>
+        <Grid
+          container
+          spacing={4}
+          style={{ marginTop: '4rem' }}
+          alignItems="center"
+          justifyContent="space-around"
+        >
+          <Grid
+            item
+            container
+            sm={12}
+            md={6}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Image
+              src="/homepage/image2.png"
+              alt="Plaatz vacatures picture"
+              width={350}
+              height={350}
+              style={{ width: '100%' }}
+            />
+          </Grid>
+          <Grid item sm={12} md={6}>
+            <div className={classes.paragraph}>
+              <Typography paragraph>
+                Het is niet niks om talent te vinden dat bij jouw vacature past,
+                maar ook matcht met je organisatiewaarden en collega’s. Onze Job
+                Consultants bieden persoonlijke ondersteuning bij het vinden van
+                een juiste match en zullen samen met jouw organisatie een
+                realistische en uitvoerige vacature opstellen. Dankzij onze
+                gerichte marketingcampagnes, actieve werving en uitgebreide
+                vacatures, vind én behoud je het talent dat bij jouw organisatie
+                past. Op deze manier zorg je er direct voor dat jouw employer
+                branding altijd on point is.
+              </Typography>
+              <Button
+                disabled
+                variant="outlined"
+                color="primary"
+                style={{ marginTop: '2rem' }}
+              >
+                Plaats vacature
+              </Button>
+            </div>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <Container>
+        <Grid
+          container
+          spacing={4}
+          style={{ marginTop: '4rem' }}
+          alignItems="center"
+          justifyContent="space-around"
+        >
+          <Grid item sm={12} md={6} style={{ padding: '2em' }}>
+            <Typography variant="h1" className={classes.h1} color="textPrimary">
+              Benieuwd wat wij voor jou of jouw organisatie kunnen betekenen?
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginTop: '2rem' }}
+              onClick={contact}
+            >
+              Neem contact op
+            </Button>
+          </Grid>
+          <Grid item sm={12} md={6} container>
+            <div className={classes.groupPicContainer}>
+              <div className={classes.bluecircle2}></div>
+              <div className={classes.purplecircle2}></div>
+            </div>
+          </Grid>
+        </Grid>
       </Container>
     </Box>
   );
