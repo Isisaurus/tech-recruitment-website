@@ -5,9 +5,18 @@ import {
   Container,
   Button,
   Grid,
+  Dialog,
+  DialogContent,
+  DialogActions,
+  TextField,
+  DialogTitle,
+  CircularProgress,
 } from '@material-ui/core';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
+
+import DoneIcon from '@material-ui/icons/Done';
 
 const useStyles = makeStyles((theme) => ({
   hero: {
@@ -186,6 +195,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home({ contact }) {
   const classes = useStyles();
+  const [icon, setIcon] = useState(null);
+  const [show, setShow] = useState(false);
+
+  const handleClickOpen = () => {
+    setIcon(null);
+    setShow(true);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const handleMessage = (e) => {
+    e.preventDefault();
+    // style button 1.
+    setIcon(<CircularProgress size="1rem" style={{ color: 'white' }} />);
+    setTimeout(() => {
+      setTimeout(() => {
+        // close windows
+        handleClose();
+      }, 2000);
+      // style button 2.
+      setIcon(<DoneIcon />);
+    }, 3000);
+  };
+
   return (
     <Box>
       <div className={classes.hero}>
@@ -276,7 +311,7 @@ export default function Home({ contact }) {
                 branding altijd on point is.
               </Typography>
               <Button
-                disabled
+                onClick={handleClickOpen}
                 variant="outlined"
                 color="primary"
                 style={{ marginTop: '2rem' }}
@@ -287,6 +322,7 @@ export default function Home({ contact }) {
           </Grid>
         </Grid>
       </Container>
+      <Container>stepper</Container>
 
       <Container>
         <Grid
@@ -300,14 +336,28 @@ export default function Home({ contact }) {
             <Typography variant="h1" className={classes.h1} color="textPrimary">
               Benieuwd wat wij voor jou of jouw organisatie kunnen betekenen?
             </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              style={{ marginTop: '2rem' }}
-              onClick={contact}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginTop: '4rem',
+              }}
             >
-              Neem contact op
-            </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleClickOpen}
+              >
+                Neem contact op
+              </Button>
+              <Typography
+                variant="subtitle2"
+                color="primary"
+                style={{ paddingLeft: '1em' }}
+              >
+                of bel 5155-5435433
+              </Typography>
+            </div>
           </Grid>
           <Grid item sm={12} md={6} container>
             <div className={classes.groupPicContainer}>
@@ -317,6 +367,54 @@ export default function Home({ contact }) {
           </Grid>
         </Grid>
       </Container>
+      <div>
+        <Dialog
+          open={show}
+          onClose={handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Contact Us</DialogTitle>
+          <form onSubmit={handleMessage}>
+            <DialogContent>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                placeholder="Your email address..."
+                label="Email Address"
+                type="email"
+                fullWidth
+                variant="outlined"
+                required
+              />
+              <TextField
+                id="outlined-multiline-static"
+                label="Your message"
+                multiline
+                rows={6}
+                placeholder="Type your message here..."
+                variant="outlined"
+                style={{ marginTop: '2rem' }}
+                required
+                fullWidth
+              />
+            </DialogContent>
+            <DialogActions style={{ marginTop: '1rem' }}>
+              <Button onClick={handleClose} color="primary" variant="text">
+                Cancel
+              </Button>
+              <Button
+                color="primary"
+                variant="contained"
+                endIcon={icon}
+                type="submit"
+              >
+                Send
+              </Button>
+            </DialogActions>
+          </form>
+        </Dialog>
+      </div>
     </Box>
   );
 }
