@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: 'none',
     marginTop: '1rem',
     padding: '0 2rem',
+    position: 'absolute',
+    top: '0',
     [theme.breakpoints.down('xs')]: {
       padding: '0 .5rem',
       marginTop: '0',
@@ -47,11 +49,11 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     textDecoration: 'none',
-    color: '#1E8DFF',
+    color: '#7a7a7a',
     '&:visited': {
-      color: '#1E8DFF',
+      color: '#7a7a7a',
       '&:hover': {
-        color: '#7a7a7a',
+        color: '#1E8DFF',
       },
     },
     '&:hover': {
