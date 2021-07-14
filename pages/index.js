@@ -1,3 +1,4 @@
+import Testemonial from '../components/Testemonial';
 import {
   makeStyles,
   Typography,
@@ -11,12 +12,45 @@ import {
   TextField,
   DialogTitle,
   CircularProgress,
+  MobileStepper,
+  useTheme,
+  Hidden,
 } from '@material-ui/core';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 
 import DoneIcon from '@material-ui/icons/Done';
+
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const testemonials = [
+  {
+    description:
+      'Eind 2019 heeft Codecareer met mij contact opgenomen via LinkedIn omtrent een nieuwe uitdaging. Ik ben ingegaan op de uitnodiging en het heeft me geleid tot een nieuwe job. De opvolging en contacten met Codecareer waren heel goed. Altijd zeer vriendelijk, enthousiast en er wordt geluisterd naar je feedback. Codecareer is heel goed op de hoogte van de cultuur en ambitie van het bedrijf waarvoor zij op zoek zijn naar nieuw talent en dat weten ze heel goed over te brengen.',
+    img: 'rob.png',
+    name: 'Rob Stockmannse',
+    title: 'Software Egineer big Evenance Sol.',
+  },
+  {
+    description:
+      'Tijdens het corona tijdperk op zoek moeten gaan naar een nieuwe baan, daarbij bijgestaan door Sara tot een goed resultaat. Zeer duidelijk in de communicatie, met geregeld updates en een positieve instelling. Wat ik vooral erg prettig ondervond was dat er weinig aan sturing werd gedaan maar wel werden uitdagingen aangegaan.',
+    img: 'eduard.png',
+    name: 'Eduard Gertsen',
+    title: 'Senior Full-stack Developer',
+  },
+  {
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, quas vero? Architecto, eius nobis. Doloremque sequi debitis aperiam assumenda laboriosam, adipisci voluptatibus error quibusdam illo minima! Veritatis, sit, consequuntur excepturi quaerat architecto ea et expedita rem, ut illum corrupti totam.',
+    img: 'ed.png',
+    name: 'Ed Mars',
+    title: 'Data Science Engineer at D&D',
+  },
+];
 
 const useStyles = makeStyles((theme) => ({
   hero: {
@@ -191,10 +225,63 @@ const useStyles = makeStyles((theme) => ({
     width: 'auto',
     height: 'auto',
   },
+  buttonContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '4rem',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+    },
+  },
+  bel: {
+    paddingLeft: '1em',
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: '0',
+      marginTop: '1em',
+    },
+  },
+  testemonials: {
+    marginTop: '8rem',
+    marginBottom: '6rem',
+  },
 }));
 
-export default function Home({ contact }) {
+export default function Home() {
   const classes = useStyles();
+  const theme = useTheme();
+
+  const [activeStep, setActiveStep] = useState(0);
+  const [nextStep, setNextStep] = useState(1);
+  const maxSteps = testemonials.length;
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+    if (activeStep + 2 === testemonials.length) {
+      setNextStep(0);
+    } else {
+      setNextStep((prevNextStep) => prevNextStep + 1);
+    }
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    if (activeStep + 2 === testemonials.length) {
+      setNextStep(1);
+    } else {
+      setNextStep(activeStep);
+    }
+  };
+
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+    if (activeStep + 2 === testemonials.length) {
+      setNextStep(0);
+    } else {
+      setNextStep((prevNextStep) => prevNextStep + 1);
+    }
+  };
+
   const [icon, setIcon] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -315,6 +402,7 @@ export default function Home({ contact }) {
                 variant="outlined"
                 color="primary"
                 style={{ marginTop: '2rem' }}
+                disableElevation
               >
                 Plaats vacature
               </Button>
@@ -322,7 +410,72 @@ export default function Home({ contact }) {
           </Grid>
         </Grid>
       </Container>
-      <Container>stepper</Container>
+      <Container className={classes.testemonials}>
+        <Grid container spacing={4} alignItems="center">
+          <Grid item sm={12} md={6}>
+            <AutoPlaySwipeableViews
+              axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+              index={activeStep}
+              onChangeIndex={handleStepChange}
+              enableMouseEvents
+            >
+              {testemonials.map((step, index) => (
+                <div key={index}>
+                  {Math.abs(activeStep - index) <= 2 ? (
+                    <Testemonial step={step} />
+                  ) : null}
+                </div>
+              ))}
+            </AutoPlaySwipeableViews>
+
+            <MobileStepper
+              style={{ width: '100%', marginTop: '2rem' }}
+              steps={maxSteps}
+              position="static"
+              variant="dots"
+              activeStep={activeStep}
+              nextButton={
+                <Button
+                  size="small"
+                  onClick={handleNext}
+                  disabled={activeStep === maxSteps - 1}
+                >
+                  {theme.direction === 'rtl' ? (
+                    <KeyboardArrowLeft />
+                  ) : (
+                    <KeyboardArrowRight />
+                  )}
+                </Button>
+              }
+              backButton={
+                <Button
+                  size="small"
+                  onClick={handleBack}
+                  disabled={activeStep === 0}
+                >
+                  {theme.direction === 'rtl' ? (
+                    <KeyboardArrowRight />
+                  ) : (
+                    <KeyboardArrowLeft />
+                  )}
+                </Button>
+              }
+            />
+          </Grid>
+          <Grid item sm={12} md={6}>
+            <Hidden smDown implementation="css">
+              <Testemonial
+                step={
+                  testemonials[nextStep]
+                    ? testemonials[nextStep]
+                    : testemonials[0]
+                }
+                secondary={true}
+              />
+            </Hidden>
+          </Grid>
+        </Grid>
+      </Container>
 
       <Container>
         <Grid
@@ -336,16 +489,11 @@ export default function Home({ contact }) {
             <Typography variant="h1" className={classes.h1} color="textPrimary">
               Benieuwd wat wij voor jou of jouw organisatie kunnen betekenen?
             </Typography>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginTop: '4rem',
-              }}
-            >
+            <div className={classes.buttonContainer}>
               <Button
                 variant="contained"
                 color="primary"
+                disableElevation
                 onClick={handleClickOpen}
               >
                 Neem contact op
@@ -353,7 +501,7 @@ export default function Home({ contact }) {
               <Typography
                 variant="subtitle2"
                 color="primary"
-                style={{ paddingLeft: '1em' }}
+                className={classes.bel}
               >
                 of bel 5155-5435433
               </Typography>
