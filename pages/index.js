@@ -116,7 +116,7 @@ export default function Home() {
 
   return (
     <>
-      <div className={classes.hero}>
+      <div className={classes.hero} placeholder="blur">
         <div className={classes.circle1}>
           <div className={classes.purpleCircle}></div>
         </div>

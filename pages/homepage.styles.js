@@ -14,6 +14,13 @@ export default makeStyles((theme) => ({
     marginBottom: '4rem',
 
     overflow: 'hidden',
+    [theme.breakpoints.down('sm')]: {
+      background:
+        'linear-gradient(0deg, rgba(0,0,0,0.75) 15%, rgba(0,0,0,0.35) 48%, rgba(0,0,0,0.8) 85%), url(/homepage/hero-phone.jpg)',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+    },
   },
   heroContent: {
     marginTop: '2rem',
