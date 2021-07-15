@@ -1,33 +1,11 @@
+import useStyles from './Testemonials.styles';
 import {
-  makeStyles,
   Card,
   CardContent,
   Divider,
   Typography,
 } from '@material-ui/core';
 import Image from 'next/image';
-
-const useStyles = makeStyles((theme) => ({
-  card: {
-    backgroundColor: 'rgba(122,122,122,.05)',
-    transition: 'all ease in .3s',
-    padding: '1rem',
-    borderRadius: '0',
-    maxWidth: '100%',
-  },
-  description: {
-    minHeight: '18rem',
-    [theme.breakpoints.down('xs')]: {
-      height: '60vh',
-      overflowY: 'auto',
-    },
-  },
-  avatarContainer: {
-    marginTop: '1rem',
-    display: 'flex',
-    alignItems: 'center',
-  },
-}));
 
 function Testemonial({ step, secondary }) {
   const classes = useStyles();

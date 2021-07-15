@@ -1,4 +1,5 @@
 // import Image from 'next/image';
+import useStyles from './JobCard.styles';
 import Link from 'next/link';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import WatchLaterOutlinedIcon from '@material-ui/icons/WatchLaterOutlined';
@@ -8,59 +9,13 @@ import {
   Typography,
   Card,
   CardContent,
-  makeStyles,
   CardMedia,
   Box,
   Button,
 } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-  thumbnail: {
-    width: '500px',
-    height: '200px',
-    [theme.breakpoints.down('xs')]: {
-      height: '150px',
-    },
-  },
-  Card: {
-    boxShadow: '-.5rem 1rem 2rem rgba(0,0,0, .15)',
-
-    '&:hover': {
-      boxShadow: '-.5rem 1rem 2rem rgba(4,103,177, .2)',
-      transition: 'all .2s ease',
-    },
-  },
-  CardContent: {
-    padding: '1rem',
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '12rem',
-  },
-  button: {
-    textTransform: 'none',
-    fontWeight: 400,
-    padding: 0,
-  },
-  labelContainer: {
-    display: 'flex',
-    marginTop: 'auto',
-  },
-}));
-
 export default function JobCard({ job }) {
-  const {
-    jobTitle,
-    slug,
-    company,
-    city,
-    salaryIndication,
-    thumbnail,
-    jobType,
-  } = job.fields;
-
-  const myLoader = ({ src }) => {
-    return `https:${src}`;
-  };
+  const { jobTitle, slug, company, city, thumbnail, jobType } = job.fields;
 
   const classes = useStyles();
 
