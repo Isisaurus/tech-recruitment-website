@@ -25,6 +25,10 @@ export default function MyApp(props) {
           rel="icon"
           href="https://github.com/Isisaurus/tech-recruitment-website/blob/main/public/favicon.png"
         />
+        <link
+          rel="apple-touch-icon"
+          href="https://github.com/Isisaurus/tech-recruitment-website/blob/main/public/favicon.png"
+        />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"

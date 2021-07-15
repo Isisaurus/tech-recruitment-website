@@ -88,6 +88,14 @@ The website allows you to:
 
 ## Future of the project
 
+Future improvements:
+
+- Improve overall site performance by code-splitting
+- Further optimize images for faster load times on smaller devices
+- Adjust background-foreground contrast ratio for wider accessibility
+- Organize Headers in a sequentially-decending order for a more optimized navigation experience
+- Set browser theme colors based on the page rendered
+
 The following features implemented would improve the usability and user experience of the website in the future:
 
 - Add contact form for companies.
