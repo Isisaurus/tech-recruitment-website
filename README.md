@@ -14,7 +14,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ```bash
 npm install
-# or
+## or
 yarn install
 ```
 
@@ -22,7 +22,7 @@ yarn install
 
 ```bash
 npm run dev
-# or
+## or
 yarn dev
 ```
 
@@ -104,7 +104,7 @@ The design of the project was inspired by the website of [Codecareer IT recruitm
 
 ## Solutions and considerations
 
-# SWR - filtering and pagination on the client side from Cache
+## SWR - filtering and pagination on the client side from Cache
 
 SWR (stale-while-revalidate) is an HTTP Cache revalidation strategy to fetch, revalidate and manage data on the client side instead of the usual combination of React hooks, useState and useEffect.
 
@@ -121,7 +121,7 @@ Want to use SWR in your project? Here's where I have learned how to use it:
 - [SWR documentation](https://swr.vercel.app/docs/getting-started)
 - [Vercel SWR GitHub repository](https://github.com/vercel/swr)
 
-# Material-UI integration with Next.js
+## Material-UI integration with Next.js
 
 After the initial setup to integrate Material-UI based on the repository provided I still had issues using the styled components from the library.
 
@@ -139,7 +139,7 @@ Have a similar issue in your setup? This is where I found answers:
 
 - [Box component odd behavior on Next.js](https://github.com/mui-org/material-ui/issues/19679)
 
-# Documentation used to create this project
+## Documentation used to create this project
 
 - [SWR - React Hooks library for data fetching](https://swr.vercel.app/docs/with-nextjs)
 
@@ -153,7 +153,7 @@ Have a similar issue in your setup? This is where I found answers:
 
 - [Static file serving - Next.js documentation](https://nextjs.org/docs/basic-features/static-file-serving)
 
-# Articles used to create this project
+## Articles used to create this project
 
 Eventually, I have decided to use the Content Delivery API of Contantful to fetch and query data for the project, but for some time I was experimenting with the Contentful GraphQL Content API.
 
@@ -163,7 +163,7 @@ The following articles provided me with the information to make the best decisio
 
 - [Next.js, Contentful CMS, GraphQL, oh my!](https://bholmes.dev/blog/nextjs-contentful-cms-graphql-oh-my/)
 
-# Media Resources
+## Media Resources
 
 - [Pexels.com](https://www.pexels.com/)
 - [Pixabay.com](https://pixabay.com/)
