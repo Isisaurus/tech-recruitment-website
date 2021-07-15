@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -9,7 +9,7 @@ import Layout from './../components/Layout';
 export default function MyApp(props) {
   const { Component, pageProps } = props;
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
@@ -18,7 +18,7 @@ export default function MyApp(props) {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>Tech-Recruitment Agency</title>
         <link rel="icon" href="/favicon.png" />
@@ -34,7 +34,7 @@ export default function MyApp(props) {
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>
-    </React.Fragment>
+    </>
   );
 }
 

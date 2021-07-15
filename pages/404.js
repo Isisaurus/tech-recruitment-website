@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { Container, Box, Typography, Button } from '@material-ui/core';
+import { Container, Typography, Button } from '@material-ui/core';
 
 export default function NotFound() {
   const router = useRouter();
@@ -14,11 +14,13 @@ export default function NotFound() {
   }, [router]);
 
   return (
-    <Box>
+    <>
       <Container
         style={{ minHeight: '25rem', marginTop: '2rem', height: '80vh' }}
       >
-        <Typography variant="h2">404</Typography>
+        <Typography variant="h2" component="h1" style={{ marginTop: '4rem' }}>
+          404
+        </Typography>
 
         <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
           <Typography variant="body1">
@@ -49,6 +51,6 @@ export default function NotFound() {
           </Link>
         </Button>
       </Container>
-    </Box>
+    </>
   );
 }
