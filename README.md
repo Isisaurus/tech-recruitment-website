@@ -36,6 +36,10 @@ Create a recruitment agency website to list, serach and filter the currently ava
 
 My goal with this project was to work closely with data in a React application, learn about implementing filters and pagination using different libraries and connect multiple platforms to create a smooth browsing experience for the visitors of the site surrounded by a simple, but modern minimalist UI design.
 
+## Preview
+
+![Screenshot](screenshot.png)
+
 ## Achievements
 
 The website allows you to:
