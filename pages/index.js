@@ -3,7 +3,6 @@ import useStyles from './homepage.styles';
 
 import {
   Typography,
-  Box,
   Container,
   Button,
   Grid,
