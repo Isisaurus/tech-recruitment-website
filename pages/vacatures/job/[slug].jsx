@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useStyles from './slug.styles';
+import useStyles from './../../../styles/slug.styles';
 
 import { createClient } from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
