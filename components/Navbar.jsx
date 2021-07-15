@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import Link from 'next/link';
 import useStyles from './Navbar.styles';
@@ -24,6 +25,8 @@ import DoneIcon from '@material-ui/icons/Done';
 import { useState } from 'react';
 
 function Navbar() {
+  const router = useRouter();
+
   const [icon, setIcon] = useState(null);
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
@@ -63,7 +66,14 @@ function Navbar() {
   const classes = useStyles();
   return (
     <>
-      <AppBar position="static" color="transparent" className={classes.AppBar}>
+      <AppBar
+        position="static"
+        color="transparent"
+        className={classes.AppBar}
+        style={{
+          position: `${router.pathname === '/' ? 'absolute' : 'relative'}`,
+        }}
+      >
         <Toolbar style={{ padding: '0' }}>
           <Link href="/">
             <a className={classes.link}>
@@ -76,14 +86,26 @@ function Navbar() {
             <div className={classes.linksContainer}>
               <Link href="/vacatures">
                 <a className={classes.link}>
-                  <Typography variant="subtitle2" className={classes.navEl}>
+                  <Typography
+                    variant="subtitle2"
+                    className={classes.navEl}
+                    style={{
+                      color: `${router.pathname === '/' ? 'white' : null}`,
+                    }}
+                  >
                     Vacatures
                   </Typography>
                 </a>
               </Link>
               <Link href="/over-ons">
                 <a className={classes.link}>
-                  <Typography variant="subtitle2" className={classes.navEl}>
+                  <Typography
+                    variant="subtitle2"
+                    className={classes.navEl}
+                    style={{
+                      color: `${router.pathname === '/' ? 'white' : null}`,
+                    }}
+                  >
                     Over ons
                   </Typography>
                 </a>

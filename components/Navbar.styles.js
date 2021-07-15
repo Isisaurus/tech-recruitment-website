@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
     boxShadow: 'none',
     marginTop: '1rem',
     padding: '0 2rem',
-    position: 'absolute',
+    position: 'relative',
     top: '0',
     [theme.breakpoints.down('xs')]: {
       padding: '0 .5rem',

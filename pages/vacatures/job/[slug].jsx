@@ -105,7 +105,7 @@ export default function VacancyDetails({ job }) {
 
   return (
     <>
-      <Box style={{ marginTop: '6rem', marginBottom: '4rem' }}>
+      <Box style={{ marginTop: '2rem', marginBottom: '4rem' }}>
         <Box className={classes.thumbnailContainer}>
           <CardMedia
             image={`https:${thumbnail.fields.file.url}`}
