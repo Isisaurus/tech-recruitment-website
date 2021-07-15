@@ -17,6 +17,9 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       background:
         'linear-gradient(0deg, rgba(0,0,0,0.75) 15%, rgba(0,0,0,0.35) 48%, rgba(0,0,0,0.8) 85%), url(/homepage/hero-lg.jpg)',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
     },
     [theme.breakpoints.down('sm')]: {
       background:
