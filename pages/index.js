@@ -116,37 +116,39 @@ export default function Home() {
 
   return (
     <>
-      <div className={classes.hero} placeholder="blur">
-        <div className={classes.circle1}>
-          <div className={classes.purpleCircle}></div>
-        </div>
-        <div className={classes.heroContent}>
-          <Typography
-            variant="h1"
-            className={classes.h1}
-            style={{ color: 'white', maxWidth: '55rem', textAlign: 'center' }}
-          >
-            Maak alvast kennis met jeuw nieuwe baan.
-          </Typography>
+      <div className={classes.heroContainer}>
+        <div className={classes.hero}>
+          <div className={classes.circle1}>
+            <div className={classes.purpleCircle}></div>
+          </div>
+          <div className={classes.heroContent}>
+            <Typography
+              variant="h1"
+              className={classes.h1}
+              style={{ color: 'white', maxWidth: '55rem', textAlign: 'center' }}
+            >
+              Maak alvast kennis met jeuw nieuwe baan.
+            </Typography>
 
-          <Typography variant="h6" className={classes.h6}>
-            Realistische vacatures. Heldere verwachtingen.
-          </Typography>
-          <Link href="/vacatures">
-            <a style={{ textDecoration: 'none' }}>
-              <Button
-                name="alle jobs"
-                variant="outlined"
-                size="large"
-                className={classes.heroBtn}
-              >
-                Bekijk alle jobs
-              </Button>
-            </a>
-          </Link>
-        </div>
-        <div className={classes.circle2}>
-          <div className={classes.bluecircle}></div>
+            <Typography variant="h6" className={classes.h6}>
+              Realistische vacatures. Heldere verwachtingen.
+            </Typography>
+            <Link href="/vacatures">
+              <a style={{ textDecoration: 'none' }}>
+                <Button
+                  name="alle jobs"
+                  variant="outlined"
+                  size="large"
+                  className={classes.heroBtn}
+                >
+                  Bekijk alle jobs
+                </Button>
+              </a>
+            </Link>
+          </div>
+          <div className={classes.circle2}>
+            <div className={classes.bluecircle}></div>
+          </div>
         </div>
         <div className={classes.bottomClip}>
           <svg

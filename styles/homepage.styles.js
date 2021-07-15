@@ -1,6 +1,10 @@
 import { makeStyles } from '@material-ui/core';
 
 export default makeStyles((theme) => ({
+  heroContainer: {
+    position: 'relative',
+    overflow: 'visible',
+  },
   hero: {
     position: 'relative',
     height: '90vh',
@@ -12,8 +16,8 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     marginBottom: '4rem',
-
     overflow: 'hidden',
+
     [theme.breakpoints.up('lg')]: {
       background:
         'linear-gradient(0deg, rgba(0,0,0,0.75) 15%, rgba(0,0,0,0.35) 48%, rgba(0,0,0,0.8) 85%), url(/homepage/hero-lg.jpg)',
@@ -59,9 +63,10 @@ export default makeStyles((theme) => ({
     },
   },
   bottomClip: {
-    position: 'relative',
-    top: '1vh',
-    height: '10vh',
+    position: 'absolute',
+    bottom: '-1%',
+    width: '100%',
+    height: '12vh',
     '& > svg': {
       height: '100%',
       width: '100%',
