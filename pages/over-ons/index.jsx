@@ -1,5 +1,4 @@
 import Team from './../../components/Team';
-// import useStyles from './over-ons.style';
 
 import {
   Container,
