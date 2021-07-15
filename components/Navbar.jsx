@@ -90,7 +90,7 @@ function Navbar() {
                     variant="subtitle2"
                     className={classes.navEl}
                     style={{
-                      color: `${router.pathname === '/' ? 'white' : null}`,
+                      color: `${router.pathname === '/' ? 'white' : '#7a7a7a'}`,
                     }}
                   >
                     Vacatures
@@ -103,7 +103,7 @@ function Navbar() {
                     variant="subtitle2"
                     className={classes.navEl}
                     style={{
-                      color: `${router.pathname === '/' ? 'white' : null}`,
+                      color: `${router.pathname === '/' ? 'white' : '#7a7a7a'}`,
                     }}
                   >
                     Over ons

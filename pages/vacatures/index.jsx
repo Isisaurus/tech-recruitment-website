@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useStyles from './vacatures.styles';
+import useStyles from './../../styles/vacatures.styles';
 import { ContentfulApi } from '../../utils/contentful';
 import Error from './../../components/Error';
 import FilterForm from '../../components/FilterForm';

@@ -1,5 +1,5 @@
 import Testemonial from '../components/Testemonial';
-import useStyles from './homepage.styles';
+import useStyles from '../styles/homepage.styles';
 
 import {
   Typography,
