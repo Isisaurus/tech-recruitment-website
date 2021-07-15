@@ -116,7 +116,7 @@ The design of the project was inspired by the website of [Codecareer IT recruitm
 
 ## Solutions and considerations
 
-# SWR - filtering and pagination on the client side from Cache
+### SWR - filtering and pagination on the client side from Cache
 
 SWR (stale-while-revalidate) is an HTTP Cache revalidation strategy to fetch, revalidate and manage data on the client side instead of the usual combination of React hooks, useState and useEffect.
 
@@ -133,7 +133,7 @@ Want to use SWR in your project? Here's where I have learned how to use it:
 - [SWR documentation](https://swr.vercel.app/docs/getting-started)
 - [Vercel SWR GitHub repository](https://github.com/vercel/swr)
 
-# Material-UI integration with Next.js
+### Material-UI integration with Next.js
 
 After the initial setup to integrate Material-UI based on the repository provided I still had issues using the styled components from the library.
 
