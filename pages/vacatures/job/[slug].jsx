@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import useStyles from './slug.styles';
 
 import { createClient } from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-import Skeleton from '../../../components/Skeleton';
-import { makeStyles } from '@material-ui/core';
+import Skeleton from './../../../components/Skeleton';
+import { useRouter } from 'next/router';
 
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import WatchLaterOutlinedIcon from '@material-ui/icons/WatchLaterOutlined';
@@ -60,7 +61,7 @@ export async function getStaticProps({ params }) {
   if (!items.length) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/404',
         permanent: false,
       },
     };
@@ -72,105 +73,8 @@ export async function getStaticProps({ params }) {
   };
 }
 
-const useStyles = makeStyles((theme) => ({
-  h1: {
-    maxWidth: '45rem',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: '3rem',
-    },
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '2.2rem',
-    },
-  },
-  overview: {
-    color: 'white',
-  },
-  labelContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    '& > *': {
-      marginTop: '1rem',
-    },
-  },
-  labelButton: {
-    textTransform: 'none',
-    fontWeight: '400',
-  },
-  thumbnailContainer: {
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '30rem',
-    height: '70vh',
-    maxHeight: '45rem',
-
-    [theme.breakpoints.down('xs')]: {
-      height: '50vh',
-      padding: '0 1rem',
-      paddingTop: '2rem',
-      alignItems: 'flex-start',
-    },
-  },
-  thumbnail: {
-    position: 'absolute',
-    zIndex: '-1',
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%',
-    filter: 'blur(1px)',
-    boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.4)',
-  },
-  paper: {
-    marginTop: '-6em',
-    padding: '1em 2em',
-    boxShadow: '.3rem 1rem 1.5rem rgba(0,0,0,0.1)',
-    maxHeight: '33rem',
-    overflowX: 'auto',
-    [theme.breakpoints.down('xs')]: {
-      maxHeight: '25rem',
-      padding: '.5rem 1rem',
-    },
-  },
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  ul: {
-    margin: '4rem 0',
-    [theme.breakpoints.down('xs')]: {
-      margin: '2rem 0',
-      paddingLeft: '0',
-    },
-  },
-  fileInput: {
-    '& > input[type="file" i]': {
-      '&::-webkit-file-upload-button': {
-        visibility: 'hidden',
-        width: '0',
-      },
-    },
-    marginTop: '2rem',
-    marginBottom: '2rem',
-  },
-  TextField: {
-    marginTop: '2rem',
-    marginBottom: '2rem',
-  },
-  message: {
-    background: 'rgba(4,103,177, .1)',
-    color: '#333',
-    padding: '1em 3em',
-    marginTop: '2rem',
-    marginBottom: '2rem',
-  },
-}));
-
 export default function VacancyDetails({ job }) {
+  const router = useRouter();
   const [submit, setSubmit] = useState(false);
   const classes = useStyles();
   const handleSubmit = (e) => {
@@ -182,7 +86,10 @@ export default function VacancyDetails({ job }) {
     }, 5000);
   };
 
-  if (!job) return <Skeleton />;
+  if (router.isFallback) {
+    return <Skeleton />;
+  }
+
   const {
     jobTitle,
     company,
@@ -198,7 +105,7 @@ export default function VacancyDetails({ job }) {
 
   return (
     <>
-      <Box style={{ marginTop: '4rem', marginBottom: '4rem' }}>
+      <Box style={{ marginTop: '6rem', marginBottom: '4rem' }}>
         <Box className={classes.thumbnailContainer}>
           <CardMedia
             image={`https:${thumbnail.fields.file.url}`}
@@ -250,6 +157,20 @@ export default function VacancyDetails({ job }) {
           <div>
             <Typography component="ul" className={classes.ul}>
               {requirements.map((req, i) => (
+                <ListItem component="li" key={i} divider>
+                  {req}
+                </ListItem>
+              ))}
+            </Typography>
+          </div>
+        </Container>
+        <Container style={{ marginTop: '6rem' }}>
+          <Typography variant="h1" component="h2" className={classes.h1}>
+            Voordelen
+          </Typography>
+          <div>
+            <Typography component="ul" className={classes.ul}>
+              {benefits.map((req, i) => (
                 <ListItem component="li" key={i} divider>
                   {req}
                 </ListItem>
