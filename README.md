@@ -175,7 +175,7 @@ The following articles provided me with the information to make the best decisio
 
 - [Next.js, Contentful CMS, GraphQL, oh my!](https://bholmes.dev/blog/nextjs-contentful-cms-graphql-oh-my/)
 
-- [Generate robots.txt and sitemap.xml in Next.j](https://imlc.me/generate-robots-txt-and-sitemap-xml-in-next-js)
+- [Generate robots.txt and sitemap.xml in Next.js](https://imlc.me/generate-robots-txt-and-sitemap-xml-in-next-js)
 
 ## Media Resources
 
