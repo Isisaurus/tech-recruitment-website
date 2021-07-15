@@ -157,6 +157,7 @@ function Navbar() {
                 </a>
               </Link>
               <Button
+                name="contact"
                 variant="contained"
                 size="small"
                 className={classes.button}
@@ -170,6 +171,7 @@ function Navbar() {
 
           <Hidden implementation="css" smUp>
             <IconButton
+              name="toggle burger menu"
               onClick={toggleDrawer}
               color="primary"
               className={classes.burger}
@@ -206,6 +208,7 @@ function Navbar() {
                   </a>
                 </Link>
                 <Button
+                  name="contact"
                   variant="contained"
                   size="small"
                   color="primary"
@@ -252,10 +255,16 @@ function Navbar() {
               />
             </DialogContent>
             <DialogActions style={{ marginTop: '1rem' }}>
-              <Button onClick={handleClose} color="primary" variant="text">
+              <Button
+                name="cancel dialog"
+                onClick={handleClose}
+                color="primary"
+                variant="text"
+              >
                 Cancel
               </Button>
               <Button
+                name="send message"
                 color="primary"
                 variant="contained"
                 endIcon={icon}

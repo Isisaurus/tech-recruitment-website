@@ -82,6 +82,7 @@ export default function JobCard({ job }) {
               </Box>
               <Box className={classes.labelContainer}>
                 <Button
+                  component="span"
                   size="small"
                   className={classes.button}
                   style={{ marginRight: '2rem', color: '#7a7a7a' }}
@@ -91,6 +92,7 @@ export default function JobCard({ job }) {
                   {city}
                 </Button>
                 <Button
+                  component="span"
                   size="small"
                   className={classes.button}
                   style={{ color: '#7a7a7a' }}

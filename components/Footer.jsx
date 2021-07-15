@@ -130,6 +130,7 @@ function Footer() {
                   required
                 />
                 <Button
+                  name="subscribe"
                   color="primary"
                   variant="text"
                   className={classes.subscribeButton}

@@ -135,6 +135,7 @@ export default function Home() {
           <Link href="/vacatures">
             <a style={{ textDecoration: 'none' }}>
               <Button
+                name="alle jobs"
                 variant="outlined"
                 size="large"
                 className={classes.heroBtn}
@@ -204,6 +205,7 @@ export default function Home() {
                 branding altijd on point is.
               </Typography>
               <Button
+                name="contact"
                 onClick={handleClickOpen}
                 variant="outlined"
                 color="primary"
@@ -301,6 +303,7 @@ export default function Home() {
                 color="primary"
                 disableElevation
                 onClick={handleClickOpen}
+                name="contact"
               >
                 Neem contact op
               </Button>
@@ -354,10 +357,16 @@ export default function Home() {
               />
             </DialogContent>
             <DialogActions style={{ marginTop: '1rem' }}>
-              <Button onClick={handleClose} color="primary" variant="text">
+              <Button
+                onClick={handleClose}
+                color="primary"
+                variant="text"
+                name="close dalog"
+              >
                 Cancel
               </Button>
               <Button
+                name="send message"
                 color="primary"
                 variant="contained"
                 endIcon={icon}

@@ -36,6 +36,7 @@ function Error() {
           </Typography>
         </div>
         <Button
+          name="back to homepage"
           variant="outlined"
           color="primary"
           style={{ marginTop: '1rem', marginBottom: '1rem' }}

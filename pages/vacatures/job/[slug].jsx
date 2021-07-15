@@ -211,6 +211,7 @@ export default function VacancyDetails({ job }) {
             </Typography>
             <Box className={classes.labelContainer}>
               <Button
+                component="span"
                 size="large"
                 className={classes.labelButton}
                 style={{ color: 'white' }}
@@ -221,6 +222,7 @@ export default function VacancyDetails({ job }) {
               </Button>
               <Button
                 size="large"
+                component="span"
                 className={classes.labelButton}
                 style={{ color: 'white' }}
                 disabled
@@ -328,7 +330,12 @@ export default function VacancyDetails({ job }) {
                 ) : null}
               </Grid>
               <Grid item sx={12}>
-                <Button type="submit" variant="outlined" color="primary">
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  color="primary"
+                  name="soliciteer"
+                >
                   Soliciteer
                 </Button>
               </Grid>

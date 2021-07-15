@@ -184,6 +184,7 @@ export default function Vacancies({ content, values }) {
             id="queryStr"
           />
           <Button
+            name="search"
             color="primary"
             variant="text"
             className={classes.searchButton}
@@ -222,6 +223,7 @@ export default function Vacancies({ content, values }) {
       <Container style={{ marginTop: '2rem', MarginBottom: '2rem' }}>
         {pageArr.map((num) => (
           <Button
+            name={`page ${num}`}
             size="medium"
             key={num}
             className={classes.paginationButton}

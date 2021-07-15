@@ -175,6 +175,7 @@ export default function FilterForm({
             </Box>
             <Box className={classes.buttonsContainer}>
               <Button
+                name="set filter"
                 variant="outlined"
                 color="primary"
                 onClick={() => {
@@ -186,6 +187,7 @@ export default function FilterForm({
                 Filter Jobs
               </Button>
               <Button
+                name="clear filter"
                 onClick={() => {
                   resetQueries();
                   handleClearQuery();
