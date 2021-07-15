@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 import Link from 'next/link';
-import useStyles from './Navbar.styles';
+import useStyles from '../styles/Navbar.styles';
 import {
   Typography,
   AppBar,
@@ -67,11 +67,10 @@ function Navbar() {
   return (
     <>
       <AppBar
-        position="static"
         color="transparent"
         className={classes.AppBar}
         style={{
-          position: `${router.pathname === '/' ? 'absolute' : 'relative'}`,
+          position: `${router.pathname === '/' ? 'absolute' : 'static'}`,
         }}
       >
         <Toolbar style={{ padding: '0' }}>

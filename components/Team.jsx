@@ -1,6 +1,6 @@
 import { Grid, Typography, Container } from '@material-ui/core';
 import Image from 'next/image';
-import useStyles from './team.styles';
+import useStyles from '../styles/team.styles';
 
 function Team({ team }) {
   const classes = useStyles();

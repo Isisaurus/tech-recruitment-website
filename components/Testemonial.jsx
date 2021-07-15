@@ -1,10 +1,5 @@
-import useStyles from './Testemonials.styles';
-import {
-  Card,
-  CardContent,
-  Divider,
-  Typography,
-} from '@material-ui/core';
+import useStyles from '../styles/Testemonials.styles';
+import { Card, CardContent, Divider, Typography } from '@material-ui/core';
 import Image from 'next/image';
 
 function Testemonial({ step, secondary }) {

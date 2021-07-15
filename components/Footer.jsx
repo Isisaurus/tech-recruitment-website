@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import Link from 'next/link';
 import { useState } from 'react';
-import useStyles from './Footer.styles';
+import useStyles from '../styles/Footer.styles';
 
 function Footer() {
   const classes = useStyles();

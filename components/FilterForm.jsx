@@ -16,7 +16,7 @@ import {
   Input,
   Hidden,
 } from '@material-ui/core';
-import useStyles from './FilterForm.styles';
+import useStyles from '../styles/FilterForm.styles';
 
 import FilterListIcon from '@material-ui/icons/FilterListOutlined';
 

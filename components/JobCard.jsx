@@ -1,5 +1,5 @@
 // import Image from 'next/image';
-import useStyles from './JobCard.styles';
+import useStyles from '../styles/JobCard.styles';
 import Link from 'next/link';
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import WatchLaterOutlinedIcon from '@material-ui/icons/WatchLaterOutlined';
