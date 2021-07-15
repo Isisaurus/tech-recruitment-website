@@ -1,5 +1,5 @@
 import Team from './../../components/Team';
-import useStyles from './over-ons.style';
+// import useStyles from './over-ons.style';
 
 import {
   Container,
@@ -8,7 +8,34 @@ import {
   Link,
   CardMedia,
   Hidden,
+  makeStyles,
 } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  h1: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '2.5rem',
+    },
+  },
+  header: {
+    marginTop: '4rem',
+    marginBottom: '4rem',
+    padding: 'inherit 0',
+  },
+  link: {
+    textDecoration: 'none',
+  },
+  headerContent: {
+    marginTop: '4rem',
+    marginLeft: '4rem',
+    width: 'auto',
+    padding: '0',
+    maxWidth: '45rem',
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: '2rem',
+    },
+  },
+}));
 
 export default function OverOns({ team }) {
   const classes = useStyles();
