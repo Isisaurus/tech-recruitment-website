@@ -32,7 +32,7 @@ yarn dev
 
 ## The goal of the project
 
-Create a recruitment agency website to list, serach and filter the currently available vacancies, showcase detailed information about the positions and give the users the option to send a complete job application through the platform.
+Create a recruitment agency website to list, search and filter the currently available vacancies, showcase detailed information about the positions and give the users the option to send a complete job application through the platform.
 
 My goal with this project was to work closely with data in a React application, learn about implementing filters and pagination using different libraries and connect multiple platforms to create a smooth browsing experience for the visitors of the site surrounded by a simple, but modern minimalist UI design.
 
