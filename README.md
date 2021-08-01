@@ -32,7 +32,7 @@ yarn dev
 
 ## The goal of the project
 
-Create a recruitment agency website to list, serach and filter the currently available vacancies, showcase detailed information about the positions and give the users the option to send a complete job application through the platform.
+Create a recruitment agency website to list, search and filter the currently available vacancies, showcase detailed information about the positions and give the users the option to send a complete job application through the platform.
 
 My goal with this project was to work closely with data in a React application, learn about implementing filters and pagination using different libraries and connect multiple platforms to create a smooth browsing experience for the visitors of the site surrounded by a simple, but modern minimalist UI design.
 
@@ -116,7 +116,7 @@ The design of the project was inspired by the website of [Codecareer IT recruitm
 
 ## Solutions and considerations
 
-# SWR - filtering and pagination on the client side from Cache
+### SWR - filtering and pagination on the client side from Cache
 
 SWR (stale-while-revalidate) is an HTTP Cache revalidation strategy to fetch, revalidate and manage data on the client side instead of the usual combination of React hooks, useState and useEffect.
 
@@ -133,7 +133,7 @@ Want to use SWR in your project? Here's where I have learned how to use it:
 - [SWR documentation](https://swr.vercel.app/docs/getting-started)
 - [Vercel SWR GitHub repository](https://github.com/vercel/swr)
 
-# Material-UI integration with Next.js
+### Material-UI integration with Next.js
 
 After the initial setup to integrate Material-UI based on the repository provided I still had issues using the styled components from the library.
 
@@ -175,7 +175,7 @@ The following articles provided me with the information to make the best decisio
 
 - [Next.js, Contentful CMS, GraphQL, oh my!](https://bholmes.dev/blog/nextjs-contentful-cms-graphql-oh-my/)
 
-- [Generate robots.txt and sitemap.xml in Next.j](https://imlc.me/generate-robots-txt-and-sitemap-xml-in-next-js)
+- [Generate robots.txt and sitemap.xml in Next.js](https://imlc.me/generate-robots-txt-and-sitemap-xml-in-next-js)
 
 ## Media Resources
 
