@@ -318,7 +318,14 @@ export default function Home() {
               </Typography>
             </div>
           </Grid>
-          <Grid item sm={12} md={6} container>
+          <Grid
+            item
+            sm={12}
+            md={6}
+            container
+            alignItems="center"
+            justifyContent="center"
+          >
             <div className={classes.groupPicContainer}>
               <div className={classes.bluecircle2}></div>
               <div className={classes.purplecircle2}></div>
